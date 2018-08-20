@@ -115,7 +115,7 @@ namespace MusicPlayer
             // 
             this.lblTitle.BackColor = System.Drawing.SystemColors.Desktop;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(135, -7);
+            this.lblTitle.Location = new System.Drawing.Point(135, 13);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(285, 45);
             this.lblTitle.TabIndex = 1;
@@ -126,7 +126,7 @@ namespace MusicPlayer
             // 
             this.lblPerformer.BackColor = System.Drawing.SystemColors.Desktop;
             this.lblPerformer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPerformer.Location = new System.Drawing.Point(135, 31);
+            this.lblPerformer.Location = new System.Drawing.Point(135, 51);
             this.lblPerformer.Name = "lblPerformer";
             this.lblPerformer.Size = new System.Drawing.Size(285, 25);
             this.lblPerformer.TabIndex = 1;
@@ -137,7 +137,7 @@ namespace MusicPlayer
             // 
             this.lblAlbum.BackColor = System.Drawing.SystemColors.Desktop;
             this.lblAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlbum.Location = new System.Drawing.Point(135, 51);
+            this.lblAlbum.Location = new System.Drawing.Point(135, 71);
             this.lblAlbum.Name = "lblAlbum";
             this.lblAlbum.Size = new System.Drawing.Size(285, 25);
             this.lblAlbum.TabIndex = 1;
@@ -148,7 +148,7 @@ namespace MusicPlayer
             // 
             this.picAlbum.ErrorImage = null;
             this.picAlbum.InitialImage = null;
-            this.picAlbum.Location = new System.Drawing.Point(2, 2);
+            this.picAlbum.Location = new System.Drawing.Point(2, 22);
             this.picAlbum.Name = "picAlbum";
             this.picAlbum.Size = new System.Drawing.Size(116, 116);
             this.picAlbum.TabIndex = 2;
@@ -158,7 +158,7 @@ namespace MusicPlayer
             // lblDuration
             // 
             this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(389, 105);
+            this.lblDuration.Location = new System.Drawing.Point(389, 125);
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(40, 13);
             this.lblDuration.TabIndex = 4;
@@ -166,8 +166,10 @@ namespace MusicPlayer
             // 
             // songProgressBar
             // 
+            this.songProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.songProgressBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.songProgressBar.Location = new System.Drawing.Point(128, 110);
+            this.songProgressBar.ForeColor = System.Drawing.Color.White;
+            this.songProgressBar.Location = new System.Drawing.Point(128, 130);
             this.songProgressBar.Name = "songProgressBar";
             this.songProgressBar.Size = new System.Drawing.Size(260, 7);
             this.songProgressBar.TabIndex = 5;
@@ -182,7 +184,7 @@ namespace MusicPlayer
             this.btnInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInfo.Image = global::MusicPlayer.Properties.Resources.About;
-            this.btnInfo.Location = new System.Drawing.Point(390, 35);
+            this.btnInfo.Location = new System.Drawing.Point(390, 55);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Size = new System.Drawing.Size(32, 32);
             this.btnInfo.TabIndex = 0;
@@ -196,7 +198,7 @@ namespace MusicPlayer
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Image = global::MusicPlayer.Properties.Resources.Settings;
-            this.btnSettings.Location = new System.Drawing.Point(390, 75);
+            this.btnSettings.Location = new System.Drawing.Point(390, 95);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(32, 32);
             this.btnSettings.TabIndex = 0;
@@ -210,7 +212,7 @@ namespace MusicPlayer
             this.btnShuffle.FlatAppearance.BorderSize = 0;
             this.btnShuffle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShuffle.Image = global::MusicPlayer.Properties.Resources.Shuffle;
-            this.btnShuffle.Location = new System.Drawing.Point(335, 75);
+            this.btnShuffle.Location = new System.Drawing.Point(335, 95);
             this.btnShuffle.Name = "btnShuffle";
             this.btnShuffle.Size = new System.Drawing.Size(32, 32);
             this.btnShuffle.TabIndex = 0;
@@ -224,7 +226,7 @@ namespace MusicPlayer
             this.btnNext.FlatAppearance.BorderSize = 0;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Image = global::MusicPlayer.Properties.Resources.Next;
-            this.btnNext.Location = new System.Drawing.Point(295, 75);
+            this.btnNext.Location = new System.Drawing.Point(295, 95);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(32, 32);
             this.btnNext.TabIndex = 0;
@@ -238,7 +240,7 @@ namespace MusicPlayer
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnBrowse.Location = new System.Drawing.Point(135, 75);
+            this.btnBrowse.Location = new System.Drawing.Point(135, 95);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(32, 32);
             this.btnBrowse.TabIndex = 0;
@@ -252,7 +254,7 @@ namespace MusicPlayer
             this.btnRepeat.FlatAppearance.BorderSize = 0;
             this.btnRepeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRepeat.Image = global::MusicPlayer.Properties.Resources.Repeat;
-            this.btnRepeat.Location = new System.Drawing.Point(175, 75);
+            this.btnRepeat.Location = new System.Drawing.Point(175, 95);
             this.btnRepeat.Name = "btnRepeat";
             this.btnRepeat.Size = new System.Drawing.Size(32, 32);
             this.btnRepeat.TabIndex = 0;
@@ -266,7 +268,7 @@ namespace MusicPlayer
             this.btnPrevious.FlatAppearance.BorderSize = 0;
             this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevious.Image = global::MusicPlayer.Properties.Resources.Previous;
-            this.btnPrevious.Location = new System.Drawing.Point(215, 75);
+            this.btnPrevious.Location = new System.Drawing.Point(215, 95);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(32, 32);
             this.btnPrevious.TabIndex = 0;
@@ -280,7 +282,7 @@ namespace MusicPlayer
             this.btnActivation.FlatAppearance.BorderSize = 0;
             this.btnActivation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActivation.Image = global::MusicPlayer.Properties.Resources.Play;
-            this.btnActivation.Location = new System.Drawing.Point(255, 75);
+            this.btnActivation.Location = new System.Drawing.Point(255, 95);
             this.btnActivation.Name = "btnActivation";
             this.btnActivation.Size = new System.Drawing.Size(32, 32);
             this.btnActivation.TabIndex = 0;
@@ -292,7 +294,7 @@ namespace MusicPlayer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.ClientSize = new System.Drawing.Size(432, 120);
+            this.ClientSize = new System.Drawing.Size(432, 140);
             this.Controls.Add(this.songProgressBar);
             this.Controls.Add(this.lblDuration);
             this.Controls.Add(this.btnInfo);
@@ -313,7 +315,6 @@ namespace MusicPlayer
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.Text = "SFM Music Player Beta";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picAlbum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

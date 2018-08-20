@@ -37,3 +37,42 @@ C:\Users\User\Documents\Visual Studio 2017\Projects\MusicPlayer\MusicPlayer\bin\
 C:\Users\User\Documents\Visual Studio 2017\Projects\MusicPlayer\MusicPlayer\bin\Debug\System.Windows.Forms.dll
 C:\Users\User\Documents\Visual Studio 2017\Projects\MusicPlayer\MusicPlayer\bin\Debug\System.Xml.dll
 C:\Users\User\Documents\Visual Studio 2017\Projects\MusicPlayer\MusicPlayer\bin\Debug\System.Xml.Linq.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.exe.config
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.exe.manifest
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.application
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.exe
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\MusicPlayer.pdb
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Id3Lib.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Mp3Lib.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\SharpZipLib.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Data.DataSetExtensions.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Data.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Deployment.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Drawing.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Net.Http.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Windows.Forms.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Xml.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\System.Xml.Linq.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\taglib-sharp.dll
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Id3Lib.pdb
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\Mp3Lib.pdb
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.AboutForm.resources
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.ID3EditForm.resources
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.MainForm.resources
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.SettingsForm.resources
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.exe.manifest
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.application
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.exe
+C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.pdb

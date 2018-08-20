@@ -51,13 +51,21 @@ namespace MusicPlayer
         Image settings  = Image.FromFile("..\\..\\Assets\\Settings.png");
         Image browse    = Image.FromFile("..\\..\\Assets\\Browse.png");
         Image Logo      = Image.FromFile("..\\..\\Assets\\AlbumArt.png");
+        Image exit      = Image.FromFile("..\\..\\Assets\\Close.png");
+
+        private PictureBox TitleBar = new PictureBox(); // create a PictureBox
+        private PictureBox CloseForm = new PictureBox(); // simulates the this.close box
+
+        private bool drag = false; // determine if we should be moving the form
+        private Point startPoint = new Point(0, 0); // also for the moving
 
         public MainForm()
         {
             InitializeComponent();
+            this.SetTitleBar();
 
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width - 2, Screen.PrimaryScreen.WorkingArea.Height - this.Height - 2);
 
             this.ChangeColors();
             this.PrepareButtons();
@@ -74,20 +82,92 @@ namespace MusicPlayer
 
             this.picAlbum.Image = Logo;
 
-            // TO CHANGE
-            songProgressBar.Value = (int)Choose.controls.currentPosition;
-            songProgressBar.ForeColor = Color.FromArgb(255, 0, 0);
-            songProgressBar.BackColor = Color.FromArgb(80, 187, 0);
+            this.TitleBar.BringToFront(); 
+            this.CloseForm.BringToFront();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        void SetTitleBar()
         {
-            this.Shuffle = false;
-            this.IsPlaying = false;
-            this.Repeat = false;
+            this.FormBorderStyle = FormBorderStyle.None;
 
-            this.ShowInTaskbar = false;
+            this.TitleBar.Location = this.Location;
+            this.TitleBar.Width = this.Width;
+            this.TitleBar.Height = 20;
+            this.TitleBar.BackColor = Color.FromArgb(10, 11, 12);
+
+            this.Controls.Add(this.TitleBar);
+
+            this.CloseForm.Width = 20;
+            this.CloseForm.Height = 20;
+            this.CloseForm.Image = new Bitmap(exit, this.CloseForm.Size);
+            this.CloseForm.Location = new Point(this.Width - this.CloseForm.Width, 0);
+
+            this.CloseForm.ForeColor = Color.Red;
+            this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
+
+            this.Controls.Add(this.CloseForm);
+            this.CloseForm.BringToFront();
+
+            this.CloseForm.MouseEnter += new EventHandler(Control_MouseEnter);
+
+            this.CloseForm.MouseLeave += new EventHandler(Control_MouseLeave);
+
+            this.CloseForm.MouseClick += new MouseEventHandler(Control_MouseClick);
+
+            this.TitleBar.MouseDown += new MouseEventHandler(Title_MouseDown);
+            this.TitleBar.MouseUp += new MouseEventHandler(Title_MouseUp);
+            this.TitleBar.MouseMove += new MouseEventHandler(Title_MouseMove);
         }
+
+        private void Control_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender.Equals(this.CloseForm))
+                this.CloseForm.BackColor = Color.FromArgb(240, 71, 71);
+        }
+
+        private void Control_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender.Equals(this.CloseForm))
+                this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
+        }
+
+        private void Control_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (sender.Equals(this.CloseForm))
+                this.Close();
+        }
+
+        void Title_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.drag = false;
+        }
+
+        void Title_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.startPoint = e.Location;
+            this.drag = true;
+        }
+
+        void Title_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.drag)
+            {
+                Point p1 = new Point(e.X, e.Y);
+                Point p2 = this.PointToScreen(p1);
+                Point p3 = new Point(p2.X - this.startPoint.X,
+                                     p2.Y - this.startPoint.Y);
+                this.Location = p3;
+            }
+        }
+
+        /*private void MainForm_Load(object sender, EventArgs e)
+        {
+            //this.Shuffle = false;
+            //this.IsPlaying = false;
+            //this.Repeat = false;
+
+            //this.ShowInTaskbar = false;
+        }*/
 
         void t_Tick(object sender, EventArgs e)
         {
@@ -103,7 +183,6 @@ namespace MusicPlayer
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-
             OpenFileDialog Open = new OpenFileDialog();
             Open.Filter = "MP3 Files|*.mp3|CSV Files|*.csv" /*+ "|All Files|*.*"*/;
             Open.InitialDirectory = MusicPlayer.SettingsForm.Path();
