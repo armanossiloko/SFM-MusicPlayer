@@ -14,6 +14,9 @@ namespace MusicPlayer
         public NewProgressBar()
         {
             this.SetStyle(ControlStyles.UserPaint, true);
+
+            this.BackColor = Color.FromArgb(255, (byte)35, (byte)35, (byte)35);
+            this.ForeColor = Color.White;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -29,6 +32,9 @@ namespace MusicPlayer
 
             e.Graphics.FillRectangle(Brushes.White, 0, 0, rec.Width, rec.Height); //Progress
             e.Graphics.FillRectangle(DarkGray, rec.Width, 0, e.ClipRectangle.Width, e.ClipRectangle.Height); //The rest
+
+            this.BackColor = Color.FromArgb(255, (byte)35, (byte)35, (byte)35);
+            this.ForeColor = Color.White;
         }
     }
 }

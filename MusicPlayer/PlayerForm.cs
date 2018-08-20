@@ -341,7 +341,7 @@ namespace MusicPlayer
                 newTitle = title;
                 newAlbum = album;
                 newPerformer = performer;
-
+                
                 this.lblTitle.Text = title;
                 this.lblPerformer.Text = performer;
                 this.lblAlbum.Text = album;
@@ -398,7 +398,7 @@ namespace MusicPlayer
                 IsPlaying = true;
 
                 t = new Timer();
-                t.Interval = 1;
+                t.Interval = 100;
                 t.Tick += new EventHandler(t_Tick);
 
                 btnActivation.Image = pause;

@@ -29,6 +29,7 @@ For now, clicking on the Info icon will open up some base info about the player 
 
 # Credits:
 
+- Crispy 
 - Freepik (Graphics)
 - Mono Project (TagLib Sharp)
 - Van Cruz (Graphics)
