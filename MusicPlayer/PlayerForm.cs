@@ -39,25 +39,27 @@ namespace MusicPlayer
         private bool Repeat;
         private bool IsPlaying;
 
-        Image play      = Image.FromFile("..\\..\\Assets\\Play.png");
-        Image pause     = Image.FromFile("..\\..\\Assets\\Pause.png");
-        Image next      = Image.FromFile("..\\..\\Assets\\Next.png");
-        Image previous  = Image.FromFile("..\\..\\Assets\\Previous.png");
-        Image about     = Image.FromFile("..\\..\\Assets\\About.png");
-        Image shuffle   = Image.FromFile("..\\..\\Assets\\Shuffle.png");
+        Image play = Image.FromFile("..\\..\\Assets\\Play.png");
+        Image pause = Image.FromFile("..\\..\\Assets\\Pause.png");
+        Image next = Image.FromFile("..\\..\\Assets\\Next.png");
+        Image previous = Image.FromFile("..\\..\\Assets\\Previous.png");
+        Image about = Image.FromFile("..\\..\\Assets\\About.png");
+        Image shuffle = Image.FromFile("..\\..\\Assets\\Shuffle.png");
         Image shuffleON = Image.FromFile("..\\..\\Assets\\ShuffleON.png");
-        Image repeat    = Image.FromFile("..\\..\\Assets\\Repeat.png");
-        Image repeatON  = Image.FromFile("..\\..\\Assets\\RepeatON.png");
-        Image settings  = Image.FromFile("..\\..\\Assets\\Settings.png");
-        Image browse    = Image.FromFile("..\\..\\Assets\\Browse.png");
-        Image Logo      = Image.FromFile("..\\..\\Assets\\AlbumArt.png");
-        Image exit      = Image.FromFile("..\\..\\Assets\\Close.png");
+        Image repeat = Image.FromFile("..\\..\\Assets\\Repeat.png");
+        Image repeatON = Image.FromFile("..\\..\\Assets\\RepeatON.png");
+        Image settings = Image.FromFile("..\\..\\Assets\\Settings.png");
+        Image browse = Image.FromFile("..\\..\\Assets\\Browse.png");
+        Image Logo = Image.FromFile("..\\..\\Assets\\AlbumArt.png");
+        Image exit = Image.FromFile("..\\..\\Assets\\Close.png");
+        Image minimize = Image.FromFile("..\\..\\Assets\\Minimize.png");
 
-        private PictureBox TitleBar = new PictureBox(); // create a PictureBox
-        private PictureBox CloseForm = new PictureBox(); // simulates the this.close box
+        private PictureBox TitleBar = new PictureBox();
+        private PictureBox CloseForm = new PictureBox();
+        private PictureBox MinimizeForm = new PictureBox();
 
-        private bool drag = false; // determine if we should be moving the form
-        private Point startPoint = new Point(0, 0); // also for the moving
+        private bool drag = false;
+        private Point startPoint = new Point(0, 0);
 
         public MainForm()
         {
@@ -70,7 +72,7 @@ namespace MusicPlayer
             this.ChangeColors();
             this.PrepareButtons();
             this.CurrentSong = -1;
-            
+
             Choose = new WindowsMediaPlayer();
 
             Choose.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
@@ -82,8 +84,9 @@ namespace MusicPlayer
 
             this.picAlbum.Image = Logo;
 
-            this.TitleBar.BringToFront(); 
+            this.TitleBar.BringToFront();
             this.CloseForm.BringToFront();
+            this.MinimizeForm.BringToFront();
         }
 
         void SetTitleBar()
@@ -94,25 +97,29 @@ namespace MusicPlayer
             this.TitleBar.Width = this.Width;
             this.TitleBar.Height = 20;
             this.TitleBar.BackColor = Color.FromArgb(10, 11, 12);
-
             this.Controls.Add(this.TitleBar);
 
             this.CloseForm.Width = 20;
             this.CloseForm.Height = 20;
             this.CloseForm.Image = new Bitmap(exit, this.CloseForm.Size);
             this.CloseForm.Location = new Point(this.Width - this.CloseForm.Width, 0);
-
-            this.CloseForm.ForeColor = Color.Red;
+            this.CloseForm.ForeColor = Color.Gray;
             this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
-
             this.Controls.Add(this.CloseForm);
-            this.CloseForm.BringToFront();
-
             this.CloseForm.MouseEnter += new EventHandler(Control_MouseEnter);
-
             this.CloseForm.MouseLeave += new EventHandler(Control_MouseLeave);
-
             this.CloseForm.MouseClick += new MouseEventHandler(Control_MouseClick);
+
+            this.MinimizeForm.Width = 20;
+            this.MinimizeForm.Height = 20;
+            this.MinimizeForm.Image = new Bitmap(minimize, this.MinimizeForm.Size);
+            this.MinimizeForm.Location = new Point(this.Width - this.CloseForm.Width - this.MinimizeForm.Width, 0);
+            this.MinimizeForm.ForeColor = Color.Gray;
+            this.MinimizeForm.BackColor = Color.FromArgb(10, 11, 12);
+            this.Controls.Add(this.MinimizeForm);
+            this.MinimizeForm.MouseEnter += new EventHandler(Control_MouseEnter);
+            this.MinimizeForm.MouseLeave += new EventHandler(Control_MouseLeave);
+            this.MinimizeForm.MouseClick += new MouseEventHandler(Control_MouseClick);
 
             this.TitleBar.MouseDown += new MouseEventHandler(Title_MouseDown);
             this.TitleBar.MouseUp += new MouseEventHandler(Title_MouseUp);
@@ -123,18 +130,30 @@ namespace MusicPlayer
         {
             if (sender.Equals(this.CloseForm))
                 this.CloseForm.BackColor = Color.FromArgb(240, 71, 71);
+            else if (sender.Equals(this.MinimizeForm))
+                this.MinimizeForm.BackColor = Color.FromArgb(43, 44, 47);
         }
 
         private void Control_MouseLeave(object sender, EventArgs e)
         {
             if (sender.Equals(this.CloseForm))
                 this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
+            else if (sender.Equals(this.MinimizeForm))
+                this.MinimizeForm.BackColor = Color.FromArgb(10, 11, 12);
         }
 
         private void Control_MouseClick(object sender, MouseEventArgs e)
         {
             if (sender.Equals(this.CloseForm))
-                this.Close();
+            {
+                MyAppContext.TrayIcon.Visible = false;
+                Application.Exit();
+            }
+            else if (sender.Equals(this.MinimizeForm))
+            {
+                this.Hide();
+            }
+            //this.Close();
         }
 
         void Title_MouseUp(object sender, MouseEventArgs e)
@@ -160,15 +179,6 @@ namespace MusicPlayer
             }
         }
 
-        /*private void MainForm_Load(object sender, EventArgs e)
-        {
-            //this.Shuffle = false;
-            //this.IsPlaying = false;
-            //this.Repeat = false;
-
-            //this.ShowInTaskbar = false;
-        }*/
-
         void t_Tick(object sender, EventArgs e)
         {
             try
@@ -177,7 +187,7 @@ namespace MusicPlayer
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
@@ -212,6 +222,8 @@ namespace MusicPlayer
                     Choose.controls.stop();
 
                     lblDuration.Text = Choose.currentMedia.durationString;
+
+                    InitializeDefaultSettings();
                 }
                 else //.mp3
                 {
@@ -231,6 +243,8 @@ namespace MusicPlayer
                         Choose.controls.stop();
 
                         lblDuration.Text = Choose.currentMedia.durationString;
+
+                        InitializeDefaultSettings();
                     }
                     else
                     {
@@ -248,6 +262,8 @@ namespace MusicPlayer
                         Choose.controls.stop();
 
                         lblDuration.Text = Choose.currentMedia.durationString;
+
+                        InitializeDefaultSettings();
                     }
                 }
             }
@@ -255,18 +271,29 @@ namespace MusicPlayer
 
         private void btnActivation_Click(object sender, EventArgs e)
         {
-            if (IsPlaying == false)
+            if (OriginalMusic != null)
             {
-                IsPlaying = true;
-                btnActivation.Image = pause;
-                Choose.controls.play();
+                if (IsPlaying == false)
+                {
+                    IsPlaying = true;
+                    btnActivation.Image = pause;
+                    Choose.controls.play();
+                }
+                else
+                {
+                    IsPlaying = false;
+                    btnActivation.Image = play;
+                    Choose.controls.pause();
+                }
             }
-            else
-            {
-                IsPlaying = false;
-                btnActivation.Image = play;
-                Choose.controls.pause();
-            }
+        }
+
+        private void InitializeDefaultSettings()
+        {
+            this.Shuffle = false;
+            this.IsPlaying = false;
+            this.btnShuffle.Image = shuffle;
+            this.btnActivation.Image = play;
         }
 
         //Take full path to .csv and return array of song details
