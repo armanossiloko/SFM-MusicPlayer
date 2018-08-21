@@ -28,70 +28,95 @@ namespace MusicPlayer.Classes
             string[] SongFiles = null;
             if (open.ShowDialog() == DialogResult.OK)
             {
-                SongFiles = open.FileNames; //Full path of all selected files
-                string line = "";
-                string dir = (Path.Combine(Path.GetDirectoryName(SongFiles[0]), SettingsForm.CSVFileName));
-                for (int i = 0; i < SongFiles.Length; i++)
+                if (SettingsForm.OnlyPaths)
                 {
-                    string FileName = Path.GetFileNameWithoutExtension(SongFiles[i]);
-                    //FileInfo file = new FileInfo(SongFiles[i]);
-                    
-                    string title = "", artist = "", album = "";
-
+                    string dir = (Path.Combine(Path.GetDirectoryName(open.FileNames[0]), SettingsForm.CSVFileName));
+                    string line = "";
                     try
                     {
-                        int minus = FileName.LastIndexOf("-");
-
-                        title = FileName.Substring(minus + 2);
-                        artist = FileName.Substring(0, minus - 1);
-                        album = Path.GetFileName(SongFiles[i]);
+                        for (int i = 0; i < open.FileNames.Length; i++)
+                        {
+                            line += open.FileNames[i];
+                            if (i < open.FileNames.Length - 1)
+                            {
+                                line += "\n";
+                            }
+                        }
+                        File.WriteAllText(@dir, line);
+                        MessageBox.Show("File " + Path.GetFileName(dir) + " has been successfully created!");
                     }
                     catch (Exception e)
                     {
-                        artist = album = "";
-                        title = Path.GetFileName(@SongFiles[i]);
+                        MessageBox.Show("There's been an issue with creating " + Path.GetFileName(dir) + "!");
                     }
+                }
+                else
+                {
+                    SongFiles = open.FileNames; //Full path of all selected files
+                    string line = "";
+                    string dir = (Path.Combine(Path.GetDirectoryName(SongFiles[0]), SettingsForm.CSVFileName));
+                    for (int i = 0; i < SongFiles.Length; i++)
+                    {
+                        string FileName = Path.GetFileNameWithoutExtension(SongFiles[i]);
+                        //FileInfo file = new FileInfo(SongFiles[i]);
 
-                    string newTitle = "", newAlbum = "", newPerformer = "";
-                    Mp3File mp3 = new Mp3File(@SongFiles[i]);
+                        string title = "", artist = "", album = "";
+
+                        try
+                        {
+                            int minus = FileName.LastIndexOf("-");
+
+                            title = FileName.Substring(minus + 2);
+                            artist = FileName.Substring(0, minus - 1);
+                            album = Path.GetFileName(SongFiles[i]);
+                        }
+                        catch (Exception e)
+                        {
+                            artist = album = "";
+                            title = Path.GetFileName(@SongFiles[i]);
+                        }
+
+                        string newTitle = "", newAlbum = "", newPerformer = "";
+                        Mp3File mp3 = new Mp3File(@SongFiles[i]);
+                        try
+                        {
+                            newTitle = mp3.TagHandler.Title;
+                            newAlbum = mp3.TagHandler.Album;
+                            newPerformer = mp3.TagHandler.Artist;
+
+                            if (newTitle == "")
+                                throw new Exception("Title is empty");
+
+                            if (newPerformer == "")
+                                throw new Exception("Performer is empty");
+
+                            if (newAlbum == "")
+                                throw new Exception("Album is empty");
+
+                            line += newPerformer + "," + newTitle + "," + newAlbum;
+                            if (i != SongFiles.Length - 1)
+                                line += "\n";
+                        }
+                        catch (Exception e)
+                        {
+                            newTitle = title;
+                            newAlbum = album;
+                            newPerformer = artist;
+
+                            line += newPerformer + "," + newTitle + "," + newAlbum;
+                            if (i != SongFiles.Length - 1)
+                                line += "\n";
+                        }
+                    }
                     try
                     {
-                        newTitle = mp3.TagHandler.Title;
-                        newAlbum = mp3.TagHandler.Album;
-                        newPerformer = mp3.TagHandler.Artist;
-
-                        if (newTitle == "")
-                            throw new Exception("Title is empty");
-
-                        if (newPerformer == "")
-                            throw new Exception("Performer is empty");
-
-                        if (newAlbum == "")
-                            throw new Exception("Album is empty");
-
-                        line += newPerformer + "," +  newTitle + "," + newAlbum;
-                        if (i != SongFiles.Length - 1)
-                            line += "\n";
+                        File.WriteAllText(@dir, line);
+                        MessageBox.Show("File " + Path.GetFileName(dir) + " has been successfully created!");
                     }
                     catch (Exception e)
                     {
-                        newTitle = title;
-                        newAlbum = album;
-                        newPerformer = artist;
-
-                        line += newPerformer + "," + newTitle + "," + newAlbum;
-                        if (i != SongFiles.Length - 1)
-                            line += "\n";
+                        MessageBox.Show("There's been an issue with creating " + Path.GetFileName(dir) + "!");
                     }
-                }
-                try
-                {
-                    File.WriteAllText(@dir, line);
-                    MessageBox.Show("File " + Path.GetFileName(dir) + " has been successfully created!");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("There's been an issue with creating " + Path.GetFileName(dir) + "!");
                 }
             }
         }
@@ -114,7 +139,10 @@ namespace MusicPlayer.Classes
                     string[] strAr = line.Split(csvDelimiter);
                     // Save column count of first line
                     if (currentLineNumner == 1)
+                    {
                         columnCount = strAr.Count();
+                        MainForm.CSVFilesList = true;
+                    }
                     else
                     {
                         //Check column count of every other lines

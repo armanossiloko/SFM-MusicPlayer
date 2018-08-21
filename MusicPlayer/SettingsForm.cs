@@ -19,6 +19,7 @@ namespace MusicPlayer
         public static string FileName = "DefaultSearchPath";
         public static string CSVFileName = "";
         public static string SongPath = "";
+        public static bool OnlyPaths = false;
 
         Image Save = Image.FromFile("..\\..\\Assets\\Save.png");
 
@@ -28,6 +29,7 @@ namespace MusicPlayer
             InitializeStyles();
             this.CenterToScreen();
             this.txtDefaultPath.Text = GetDefaultPath();
+            OnlyPaths = this.checkFileNames.Checked;
         }
 
 
@@ -177,6 +179,11 @@ namespace MusicPlayer
         {
             ID3EditForm iD3 = new ID3EditForm();
             iD3.Show();
+        }
+
+        private void checkFileNames_CheckedChanged(object sender, EventArgs e)
+        {
+            OnlyPaths = this.checkFileNames.Checked;
         }
     }
 }

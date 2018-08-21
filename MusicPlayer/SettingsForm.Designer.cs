@@ -39,6 +39,8 @@
             this.btnBrowseSongs = new MusicPlayer.Classes.NewButton();
             this.btnSave = new MusicPlayer.Classes.NewButton();
             this.btnBrowsePath = new MusicPlayer.Classes.NewButton();
+            this.checkFileNames = new System.Windows.Forms.CheckBox();
+            this.lblCheckFilenames = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtDefaultPath
@@ -47,7 +49,7 @@
             this.txtDefaultPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDefaultPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDefaultPath.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtDefaultPath.Location = new System.Drawing.Point(192, 26);
+            this.txtDefaultPath.Location = new System.Drawing.Point(192, 25);
             this.txtDefaultPath.Name = "txtDefaultPath";
             this.txtDefaultPath.Size = new System.Drawing.Size(137, 26);
             this.txtDefaultPath.TabIndex = 2;
@@ -69,7 +71,7 @@
             this.lblCreateDB.AutoSize = true;
             this.lblCreateDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCreateDB.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblCreateDB.Location = new System.Drawing.Point(12, 66);
+            this.lblCreateDB.Location = new System.Drawing.Point(12, 70);
             this.lblCreateDB.Name = "lblCreateDB";
             this.lblCreateDB.Size = new System.Drawing.Size(172, 20);
             this.lblCreateDB.TabIndex = 5;
@@ -95,7 +97,7 @@
             this.txtSongPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSongPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSongPath.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtSongPath.Location = new System.Drawing.Point(192, 103);
+            this.txtSongPath.Location = new System.Drawing.Point(192, 134);
             this.txtSongPath.Name = "txtSongPath";
             this.txtSongPath.Size = new System.Drawing.Size(137, 26);
             this.txtSongPath.TabIndex = 11;
@@ -105,7 +107,7 @@
             this.lblEditSongID3.AutoSize = true;
             this.lblEditSongID3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEditSongID3.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblEditSongID3.Location = new System.Drawing.Point(12, 104);
+            this.lblEditSongID3.Location = new System.Drawing.Point(12, 136);
             this.lblEditSongID3.Name = "lblEditSongID3";
             this.lblEditSongID3.Size = new System.Drawing.Size(110, 20);
             this.lblEditSongID3.TabIndex = 10;
@@ -119,7 +121,7 @@
             this.btnOpenSong.FlatAppearance.BorderSize = 0;
             this.btnOpenSong.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenSong.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnOpenSong.Location = new System.Drawing.Point(335, 99);
+            this.btnOpenSong.Location = new System.Drawing.Point(335, 130);
             this.btnOpenSong.Name = "btnOpenSong";
             this.btnOpenSong.Size = new System.Drawing.Size(32, 32);
             this.btnOpenSong.TabIndex = 12;
@@ -133,7 +135,7 @@
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = global::MusicPlayer.Properties.Resources.Edit;
-            this.btnEdit.Location = new System.Drawing.Point(373, 100);
+            this.btnEdit.Location = new System.Drawing.Point(373, 130);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(32, 32);
             this.btnEdit.TabIndex = 9;
@@ -161,7 +163,7 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = global::MusicPlayer.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(373, 23);
+            this.btnSave.Location = new System.Drawing.Point(373, 22);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 32);
             this.btnSave.TabIndex = 4;
@@ -175,19 +177,45 @@
             this.btnBrowsePath.FlatAppearance.BorderSize = 0;
             this.btnBrowsePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowsePath.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnBrowsePath.Location = new System.Drawing.Point(335, 23);
+            this.btnBrowsePath.Location = new System.Drawing.Point(335, 22);
             this.btnBrowsePath.Name = "btnBrowsePath";
             this.btnBrowsePath.Size = new System.Drawing.Size(32, 32);
             this.btnBrowsePath.TabIndex = 1;
             this.btnBrowsePath.UseVisualStyleBackColor = true;
             this.btnBrowsePath.Click += new System.EventHandler(this.btnBrowsePath_Click);
             // 
+            // checkFileNames
+            // 
+            this.checkFileNames.AutoSize = true;
+            this.checkFileNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkFileNames.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkFileNames.Location = new System.Drawing.Point(192, 105);
+            this.checkFileNames.Name = "checkFileNames";
+            this.checkFileNames.Size = new System.Drawing.Size(15, 14);
+            this.checkFileNames.TabIndex = 13;
+            this.checkFileNames.UseVisualStyleBackColor = true;
+            this.checkFileNames.CheckedChanged += new System.EventHandler(this.checkFileNames_CheckedChanged);
+            // 
+            // lblCheckFilenames
+            // 
+            this.lblCheckFilenames.AutoSize = true;
+            this.lblCheckFilenames.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheckFilenames.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblCheckFilenames.Location = new System.Drawing.Point(12, 99);
+            this.lblCheckFilenames.Name = "lblCheckFilenames";
+            this.lblCheckFilenames.Size = new System.Drawing.Size(162, 20);
+            this.lblCheckFilenames.TabIndex = 14;
+            this.lblCheckFilenames.Text = "Include paths in CSV:";
+            this.lblCheckFilenames.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.ClientSize = new System.Drawing.Size(419, 146);
+            this.ClientSize = new System.Drawing.Size(419, 179);
+            this.Controls.Add(this.lblCheckFilenames);
+            this.Controls.Add(this.checkFileNames);
             this.Controls.Add(this.btnOpenSong);
             this.Controls.Add(this.txtSongPath);
             this.Controls.Add(this.lblEditSongID3);
@@ -224,5 +252,7 @@
         private System.Windows.Forms.TextBox txtSongPath;
         private System.Windows.Forms.Label lblEditSongID3;
         private Classes.NewButton btnOpenSong;
+        private System.Windows.Forms.CheckBox checkFileNames;
+        private System.Windows.Forms.Label lblCheckFilenames;
     }
 }

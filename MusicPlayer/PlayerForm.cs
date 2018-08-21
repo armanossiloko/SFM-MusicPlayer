@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 
 namespace MusicPlayer
 {
-    enum PlayState { OneSong, MultipleSongs, CSVPlaylist };
+    enum PlayState { OneSong, MultipleSongs, CSVPlaylist, CSVFilePlaylist };
     public partial class MainForm : Form
     {
         PlayState State;
@@ -38,6 +38,7 @@ namespace MusicPlayer
         private bool Shuffle;
         private bool Repeat;
         private bool IsPlaying;
+        public static bool CSVFilesList;
 
         Image play = Image.FromFile("..\\..\\Assets\\Play.png");
         Image pause = Image.FromFile("..\\..\\Assets\\Pause.png");
@@ -87,6 +88,8 @@ namespace MusicPlayer
             this.TitleBar.BringToFront();
             this.CloseForm.BringToFront();
             this.MinimizeForm.BringToFront();
+
+            CSVFilesList = false;
         }
 
         void SetTitleBar()
@@ -203,27 +206,58 @@ namespace MusicPlayer
             {
                 if (Path.GetExtension(Open.FileName) == ".csv")
                 {
-                    State = PlayState.CSVPlaylist;
+                    if (CSV.Import(Open.FileName, ',').ElementAt(0).Length != 1)
+                    {
+                        State = PlayState.CSVPlaylist;
 
-                    PlaylistPath = Open.FileName;
-                    GlobalPath = Path.GetDirectoryName(PlaylistPath) + "\\";
-                    OriginalSongDetails = Songs(PlaylistPath); //Take full path to .csv and return values
-                    SongDetails = new List<string[]>(OriginalSongDetails);
-                    OriginalMusic = new List<string>(Filenames()); //List of direct paths to each song
-                    Music = new List<string>(OriginalMusic);
-
-
-                    CurrentSong = 0;
-                    string firstSong = Music[CurrentSong]; //Artist - Album.mp3
+                        PlaylistPath = Open.FileName;
+                        GlobalPath = Path.GetDirectoryName(PlaylistPath) + "\\";
+                        OriginalSongDetails = Songs(PlaylistPath); //Take full path to .csv and return values
+                        SongDetails = new List<string[]>(OriginalSongDetails);
+                        OriginalMusic = new List<string>(Filenames()); //List of direct paths to each song
+                        Music = new List<string>(OriginalMusic);
 
 
-                    Choose.URL = firstSong;
-                    SetDetails(CurrentSong);
-                    Choose.controls.stop();
+                        CurrentSong = 0;
+                        string firstSong = Music[CurrentSong]; //Artist - Album.mp3
 
-                    lblDuration.Text = Choose.currentMedia.durationString;
 
-                    InitializeDefaultSettings();
+                        Choose.URL = firstSong;
+                        SetDetails(CurrentSong);
+                        Choose.controls.stop();
+
+                        lblDuration.Text = Choose.currentMedia.durationString;
+
+                        InitializeDefaultSettings();
+                    }
+                    else if (CSV.Import(Open.FileName, ',').ElementAt(0).Length == 1) // NOT TESTED
+                    {
+                        State = PlayState.CSVFilePlaylist;
+
+                        SongDetails = null;
+                        GlobalPath = null;
+                        List<string[]> vs = CSV.Import(Open.FileName, ',');
+                        
+                        OriginalMusic = new List<string>();
+                        for (int i = 0; i < vs.Count; i++)
+                        {
+                            OriginalMusic.Add(vs.ElementAt(i)[0]);
+                        }
+                        Music = new List<string>(OriginalMusic);
+
+
+                        CurrentSong = 0;
+                        Choose.URL = OriginalMusic.ElementAt(0);
+                        SetDetails(OriginalMusic.ElementAt(0));
+
+                        Choose.controls.stop();
+
+                        lblDuration.Text = Choose.currentMedia.durationString;
+
+                        InitializeDefaultSettings();
+                    }
+
+
                 }
                 else //.mp3
                 {
@@ -271,20 +305,17 @@ namespace MusicPlayer
 
         private void btnActivation_Click(object sender, EventArgs e)
         {
-            if (OriginalMusic != null)
+            if (IsPlaying == false)
             {
-                if (IsPlaying == false)
-                {
-                    IsPlaying = true;
-                    btnActivation.Image = pause;
-                    Choose.controls.play();
-                }
-                else
-                {
-                    IsPlaying = false;
-                    btnActivation.Image = play;
-                    Choose.controls.pause();
-                }
+                IsPlaying = true;
+                btnActivation.Image = pause;
+                Choose.controls.play();
+            }
+            else
+            {
+                IsPlaying = false;
+                btnActivation.Image = play;
+                Choose.controls.pause();
             }
         }
 
@@ -316,6 +347,11 @@ namespace MusicPlayer
         void SetDetails(int index)
         {
             if (State == PlayState.MultipleSongs)
+            {
+                SetDetails(Music.ElementAt(CurrentSong));
+                return;
+            }
+            else if (State == PlayState.CSVFilePlaylist)
             {
                 SetDetails(Music.ElementAt(CurrentSong));
                 return;
