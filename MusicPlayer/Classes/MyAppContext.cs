@@ -44,6 +44,7 @@ namespace MusicPlayer.Classes
         void Show(object sender, EventArgs e)
         {
             mainForm.Show();
+            mainForm.Activate();
         }
 
         private void NotifyIcon_Click(object sender, EventArgs e)
@@ -53,6 +54,7 @@ namespace MusicPlayer.Classes
             {
                 case MouseButtons.Left:
                     mainForm.Show();
+                    mainForm.Activate();
                     break;
             }
         }
