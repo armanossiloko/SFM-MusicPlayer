@@ -85,11 +85,38 @@ namespace MusicPlayer
 
             this.picAlbum.Image = Logo;
 
+
+            this.TitleBar.Image = Image.FromFile(@"..\..\Assets\Header.png");
             this.TitleBar.BringToFront();
             this.CloseForm.BringToFront();
             this.MinimizeForm.BringToFront();
 
             CSVFilesList = false;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Alt | Keys.N))
+            {
+                NextSong();
+                return true;
+            }
+            else if (keyData == (Keys.Alt | Keys.B))
+            {
+                if (CurrentSong > 0)
+                {
+                    Choose.URL = Music.ElementAt(CurrentSong - 1);
+                    if (IsPlaying == false)
+                    {
+                        IsPlaying = true;
+                        btnActivation.Image = pause;
+                    }
+                    CurrentSong--;
+                    SetDetails(CurrentSong);
+                }
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         void SetTitleBar()
