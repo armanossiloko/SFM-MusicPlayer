@@ -40,32 +40,32 @@ namespace MusicPlayer
         private bool IsPlaying;
         public static bool CSVFilesList;
 
-        Image play = Image.FromFile("..\\..\\Assets\\Play.png");
-        Image pause = Image.FromFile("..\\..\\Assets\\Pause.png");
-        Image next = Image.FromFile("..\\..\\Assets\\Next.png");
-        Image previous = Image.FromFile("..\\..\\Assets\\Previous.png");
-        Image about = Image.FromFile("..\\..\\Assets\\About.png");
-        Image shuffle = Image.FromFile("..\\..\\Assets\\Shuffle.png");
-        Image shuffleON = Image.FromFile("..\\..\\Assets\\ShuffleON.png");
-        Image repeat = Image.FromFile("..\\..\\Assets\\Repeat.png");
-        Image repeatON = Image.FromFile("..\\..\\Assets\\RepeatON.png");
-        Image settings = Image.FromFile("..\\..\\Assets\\Settings.png");
-        Image browse = Image.FromFile("..\\..\\Assets\\Browse.png");
-        Image Logo = Image.FromFile("..\\..\\Assets\\AlbumArt.png");
-        Image exit = Image.FromFile("..\\..\\Assets\\Close.png");
-        Image minimize = Image.FromFile("..\\..\\Assets\\Minimize.png");
+        Image Play = Image.FromFile(@"..\..\Assets\Play.png");
+        Image Pause = Image.FromFile(@"..\..\Assets\Pause.png");
+        Image Next = Image.FromFile(@"..\..\Assets\Next.png");
+        Image Previous = Image.FromFile(@"..\..\Assets\Previous.png");
+        Image About = Image.FromFile(@"..\..\Assets\About.png");
+        Image ShuffleOff = Image.FromFile(@"..\..\Assets\Shuffle.png");
+        Image ShuffleON = Image.FromFile(@"..\..\Assets\ShuffleON.png");
+        Image RepeatOff = Image.FromFile(@"..\..\Assets\Repeat.png");
+        Image RepeatON = Image.FromFile(@"..\..\Assets\RepeatON.png");
+        Image Settings = Image.FromFile(@"..\..\Assets\Settings.png");
+        Image Browse = Image.FromFile(@"..\..\Assets\Browse.png");
+        Image Logo = Image.FromFile(@"..\..\Assets\AlbumArt.png");
+        Image Exit = Image.FromFile(@"..\..\Assets\Close.png");
+        Image Minimize = Image.FromFile(@"..\..\Assets\Minimize.png");
 
         private PictureBox TitleBar = new PictureBox();
         private PictureBox CloseForm = new PictureBox();
         private PictureBox MinimizeForm = new PictureBox();
 
-        private bool drag = false;
-        private Point startPoint = new Point(0, 0);
+        private bool Drag = false;
+        private Point StartPoint = new Point(0, 0);
 
         public MainForm()
         {
             InitializeComponent();
-            this.SetTitleBar();
+            SetTitleBar();
 
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width - 2, Screen.PrimaryScreen.WorkingArea.Height - this.Height - 2);
@@ -79,17 +79,11 @@ namespace MusicPlayer
             Choose.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
             Choose.MediaError += new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
 
-            UseCustomFont("..\\..\\Assets\\segoeui.ttf", 18, this.lblTitle);
-            UseCustomFont("..\\..\\Assets\\segoeui.ttf", 12, this.lblAlbum);
-            UseCustomFont("..\\..\\Assets\\segoeui.ttf", 14, this.lblPerformer);
+            UseCustomFont(@"..\..\Assets\segoeui.ttf", 18, this.lblTitle);
+            UseCustomFont(@"..\..\Assets\segoeui.ttf", 12, this.lblAlbum);
+            UseCustomFont(@"..\..\Assets\segoeui.ttf", 14, this.lblPerformer);
 
             this.picAlbum.Image = Logo;
-
-
-            this.TitleBar.Image = Image.FromFile(@"..\..\Assets\Header.png");
-            this.TitleBar.BringToFront();
-            this.CloseForm.BringToFront();
-            this.MinimizeForm.BringToFront();
 
             CSVFilesList = false;
         }
@@ -109,7 +103,7 @@ namespace MusicPlayer
                     if (IsPlaying == false)
                     {
                         IsPlaying = true;
-                        btnActivation.Image = pause;
+                        btnActivation.Image = Pause;
                     }
                     CurrentSong--;
                     SetDetails(CurrentSong);
@@ -127,11 +121,12 @@ namespace MusicPlayer
             this.TitleBar.Width = this.Width;
             this.TitleBar.Height = 20;
             this.TitleBar.BackColor = Color.FromArgb(10, 11, 12);
+            this.TitleBar.Image = Image.FromFile(@"..\..\Assets\Headers\Header.png");
             this.Controls.Add(this.TitleBar);
 
             this.CloseForm.Width = 20;
             this.CloseForm.Height = 20;
-            this.CloseForm.Image = new Bitmap(exit, this.CloseForm.Size);
+            this.CloseForm.Image = new Bitmap(Exit, this.CloseForm.Size);
             this.CloseForm.Location = new Point(this.Width - this.CloseForm.Width, 0);
             this.CloseForm.ForeColor = Color.Gray;
             this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
@@ -142,7 +137,7 @@ namespace MusicPlayer
 
             this.MinimizeForm.Width = 20;
             this.MinimizeForm.Height = 20;
-            this.MinimizeForm.Image = new Bitmap(minimize, this.MinimizeForm.Size);
+            this.MinimizeForm.Image = new Bitmap(Minimize, this.MinimizeForm.Size);
             this.MinimizeForm.Location = new Point(this.Width - this.CloseForm.Width - this.MinimizeForm.Width, 0);
             this.MinimizeForm.ForeColor = Color.Gray;
             this.MinimizeForm.BackColor = Color.FromArgb(10, 11, 12);
@@ -154,6 +149,10 @@ namespace MusicPlayer
             this.TitleBar.MouseDown += new MouseEventHandler(Title_MouseDown);
             this.TitleBar.MouseUp += new MouseEventHandler(Title_MouseUp);
             this.TitleBar.MouseMove += new MouseEventHandler(Title_MouseMove);
+
+            this.TitleBar.BringToFront();
+            this.CloseForm.BringToFront();
+            this.MinimizeForm.BringToFront();
         }
 
         private void Control_MouseEnter(object sender, EventArgs e)
@@ -188,23 +187,23 @@ namespace MusicPlayer
 
         void Title_MouseUp(object sender, MouseEventArgs e)
         {
-            this.drag = false;
+            this.Drag = false;
         }
 
         void Title_MouseDown(object sender, MouseEventArgs e)
         {
-            this.startPoint = e.Location;
-            this.drag = true;
+            this.StartPoint = e.Location;
+            this.Drag = true;
         }
 
         void Title_MouseMove(object sender, MouseEventArgs e)
         {
-            if (this.drag)
+            if (this.Drag)
             {
                 Point p1 = new Point(e.X, e.Y);
                 Point p2 = this.PointToScreen(p1);
-                Point p3 = new Point(p2.X - this.startPoint.X,
-                                     p2.Y - this.startPoint.Y);
+                Point p3 = new Point(p2.X - this.StartPoint.X,
+                                     p2.Y - this.StartPoint.Y);
                 this.Location = p3;
             }
         }
@@ -332,17 +331,20 @@ namespace MusicPlayer
 
         private void btnActivation_Click(object sender, EventArgs e)
         {
-            if (IsPlaying == false)
+            if (OriginalMusic != null)
             {
-                IsPlaying = true;
-                btnActivation.Image = pause;
-                Choose.controls.play();
-            }
-            else
-            {
-                IsPlaying = false;
-                btnActivation.Image = play;
-                Choose.controls.pause();
+                if (IsPlaying == false)
+                {
+                    IsPlaying = true;
+                    btnActivation.Image = Pause;
+                    Choose.controls.play();
+                }
+                else
+                {
+                    IsPlaying = false;
+                    btnActivation.Image = Play;
+                    Choose.controls.pause();
+                }
             }
         }
 
@@ -350,8 +352,8 @@ namespace MusicPlayer
         {
             this.Shuffle = false;
             this.IsPlaying = false;
-            this.btnShuffle.Image = shuffle;
-            this.btnActivation.Image = play;
+            this.btnShuffle.Image = ShuffleOff;
+            this.btnActivation.Image = Play;
         }
 
         //Take full path to .csv and return array of song details
@@ -524,6 +526,7 @@ namespace MusicPlayer
             label.Font = new Font(modernFont.Families[0], size);
         }
 
+        // SUBJECT TO REMOVE
         bool wasCalled = false; // Media stopped gets called twice
         private void Player_PlayStateChange(int NewState)
         {
@@ -545,9 +548,9 @@ namespace MusicPlayer
                     }
                     else
                     {
-                        Choose.controls.play();  //NOT SURE WHY I ADDED IT
+                        Choose.controls.play(); 
                         IsPlaying = true;
-                        btnActivation.Image = pause;
+                        btnActivation.Image = Pause;
                         return;
                     }
                 }
@@ -560,7 +563,7 @@ namespace MusicPlayer
             else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsPaused)
             {
                 IsPlaying = false;
-                btnActivation.Image = play;
+                btnActivation.Image = Play;
             }
             else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsPlaying)
             {
@@ -570,11 +573,11 @@ namespace MusicPlayer
                 t.Interval = 100;
                 t.Tick += new EventHandler(t_Tick);
 
-                btnActivation.Image = pause;
+                btnActivation.Image = Pause;
             }
             else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsMediaEnded)
             {
-                btnActivation.Image = play;
+                btnActivation.Image = Play;
                 IsPlaying = false;
             }
 
@@ -641,7 +644,7 @@ namespace MusicPlayer
                 if (IsPlaying == false)
                 {
                     IsPlaying = true;
-                    btnActivation.Image = pause;
+                    btnActivation.Image = Pause;
                 }
                 CurrentSong--;
                 SetDetails(CurrentSong);
@@ -657,13 +660,13 @@ namespace MusicPlayer
                     Music = new List<string>(OriginalMusic);
                     if (OriginalSongDetails != null)
                         SongDetails = new List<string[]>(OriginalSongDetails);
-                    this.btnShuffle.Image = shuffle;
+                    this.btnShuffle.Image = ShuffleOff;
                     Shuffle = false;
                 }
                 else
                 {
                     ShuffleList(Music, SongDetails);
-                    this.btnShuffle.Image = shuffleON;
+                    this.btnShuffle.Image = ShuffleON;
                     Shuffle = true;
                 }
             }
@@ -694,15 +697,18 @@ namespace MusicPlayer
 
         private void btnRepeat_Click(object sender, EventArgs e)
         {
-            if (Repeat) //Turned on
+            if (OriginalMusic != null)
             {
-                this.btnRepeat.Image = repeat;
-                Repeat = false;
-            }
-            else
-            {
-                this.btnRepeat.Image = repeatON;
-                Repeat = true;
+                if (Repeat) //Turned on
+                {
+                    this.btnRepeat.Image = RepeatOff;
+                    Repeat = false;
+                }
+                else
+                {
+                    this.btnRepeat.Image = RepeatON;
+                    Repeat = true;
+                }
             }
         }
 

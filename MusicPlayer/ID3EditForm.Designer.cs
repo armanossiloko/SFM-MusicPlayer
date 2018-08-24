@@ -45,7 +45,7 @@
             this.lblAlbum.AutoSize = true;
             this.lblAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlbum.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblAlbum.Location = new System.Drawing.Point(12, 62);
+            this.lblAlbum.Location = new System.Drawing.Point(12, 73);
             this.lblAlbum.Name = "lblAlbum";
             this.lblAlbum.Size = new System.Drawing.Size(58, 20);
             this.lblAlbum.TabIndex = 5;
@@ -56,7 +56,7 @@
             // 
             this.txtAlbum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAlbum.Location = new System.Drawing.Point(79, 58);
+            this.txtAlbum.Location = new System.Drawing.Point(79, 69);
             this.txtAlbum.Name = "txtAlbum";
             this.txtAlbum.Size = new System.Drawing.Size(250, 26);
             this.txtAlbum.TabIndex = 2;
@@ -66,7 +66,7 @@
             this.lblArtist.AutoSize = true;
             this.lblArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblArtist.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblArtist.Location = new System.Drawing.Point(12, 101);
+            this.lblArtist.Location = new System.Drawing.Point(12, 112);
             this.lblArtist.Name = "lblArtist";
             this.lblArtist.Size = new System.Drawing.Size(50, 20);
             this.lblArtist.TabIndex = 7;
@@ -77,7 +77,7 @@
             // 
             this.txtArtist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtArtist.Location = new System.Drawing.Point(79, 97);
+            this.txtArtist.Location = new System.Drawing.Point(79, 108);
             this.txtArtist.Name = "txtArtist";
             this.txtArtist.Size = new System.Drawing.Size(250, 26);
             this.txtArtist.TabIndex = 3;
@@ -87,7 +87,7 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblTitle.Location = new System.Drawing.Point(12, 22);
+            this.lblTitle.Location = new System.Drawing.Point(12, 33);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(42, 20);
             this.lblTitle.TabIndex = 1;
@@ -98,14 +98,14 @@
             // 
             this.txtTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(79, 18);
+            this.txtTitle.Location = new System.Drawing.Point(79, 29);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(250, 26);
             this.txtTitle.TabIndex = 1;
             // 
             // picAlbum
             // 
-            this.picAlbum.Location = new System.Drawing.Point(344, 18);
+            this.picAlbum.Location = new System.Drawing.Point(344, 29);
             this.picAlbum.Name = "picAlbum";
             this.picAlbum.Size = new System.Drawing.Size(105, 105);
             this.picAlbum.TabIndex = 8;
@@ -118,7 +118,7 @@
             this.btnBrowseSong.FlatAppearance.BorderSize = 0;
             this.btnBrowseSong.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowseSong.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnBrowseSong.Location = new System.Drawing.Point(379, 129);
+            this.btnBrowseSong.Location = new System.Drawing.Point(379, 140);
             this.btnBrowseSong.Name = "btnBrowseSong";
             this.btnBrowseSong.Size = new System.Drawing.Size(32, 32);
             this.btnBrowseSong.TabIndex = 13;
@@ -132,7 +132,7 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = global::MusicPlayer.Properties.Resources.Edit;
-            this.btnSave.Location = new System.Drawing.Point(417, 129);
+            this.btnSave.Location = new System.Drawing.Point(417, 140);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 32);
             this.btnSave.TabIndex = 10;
@@ -144,7 +144,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.ClientSize = new System.Drawing.Size(473, 169);
+            this.ClientSize = new System.Drawing.Size(473, 176);
             this.Controls.Add(this.btnBrowseSong);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.picAlbum);

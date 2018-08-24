@@ -49,7 +49,7 @@
             this.txtDefaultPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDefaultPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDefaultPath.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtDefaultPath.Location = new System.Drawing.Point(192, 25);
+            this.txtDefaultPath.Location = new System.Drawing.Point(192, 32);
             this.txtDefaultPath.Name = "txtDefaultPath";
             this.txtDefaultPath.Size = new System.Drawing.Size(137, 26);
             this.txtDefaultPath.TabIndex = 2;
@@ -59,7 +59,7 @@
             this.lblDefaultPath.AutoSize = true;
             this.lblDefaultPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDefaultPath.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblDefaultPath.Location = new System.Drawing.Point(12, 30);
+            this.lblDefaultPath.Location = new System.Drawing.Point(12, 37);
             this.lblDefaultPath.Name = "lblDefaultPath";
             this.lblDefaultPath.Size = new System.Drawing.Size(157, 20);
             this.lblDefaultPath.TabIndex = 3;
@@ -71,7 +71,7 @@
             this.lblCreateDB.AutoSize = true;
             this.lblCreateDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCreateDB.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblCreateDB.Location = new System.Drawing.Point(12, 70);
+            this.lblCreateDB.Location = new System.Drawing.Point(12, 77);
             this.lblCreateDB.Name = "lblCreateDB";
             this.lblCreateDB.Size = new System.Drawing.Size(172, 20);
             this.lblCreateDB.TabIndex = 5;
@@ -84,7 +84,7 @@
             this.txtDBName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDBName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDBName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtDBName.Location = new System.Drawing.Point(192, 65);
+            this.txtDBName.Location = new System.Drawing.Point(192, 72);
             this.txtDBName.Name = "txtDBName";
             this.txtDBName.Size = new System.Drawing.Size(137, 26);
             this.txtDBName.TabIndex = 7;
@@ -97,7 +97,7 @@
             this.txtSongPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSongPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSongPath.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.txtSongPath.Location = new System.Drawing.Point(192, 134);
+            this.txtSongPath.Location = new System.Drawing.Point(192, 141);
             this.txtSongPath.Name = "txtSongPath";
             this.txtSongPath.Size = new System.Drawing.Size(137, 26);
             this.txtSongPath.TabIndex = 11;
@@ -107,7 +107,7 @@
             this.lblEditSongID3.AutoSize = true;
             this.lblEditSongID3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEditSongID3.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblEditSongID3.Location = new System.Drawing.Point(12, 136);
+            this.lblEditSongID3.Location = new System.Drawing.Point(12, 143);
             this.lblEditSongID3.Name = "lblEditSongID3";
             this.lblEditSongID3.Size = new System.Drawing.Size(110, 20);
             this.lblEditSongID3.TabIndex = 10;
@@ -121,7 +121,7 @@
             this.btnOpenSong.FlatAppearance.BorderSize = 0;
             this.btnOpenSong.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenSong.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnOpenSong.Location = new System.Drawing.Point(335, 130);
+            this.btnOpenSong.Location = new System.Drawing.Point(335, 137);
             this.btnOpenSong.Name = "btnOpenSong";
             this.btnOpenSong.Size = new System.Drawing.Size(32, 32);
             this.btnOpenSong.TabIndex = 12;
@@ -135,7 +135,7 @@
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Image = global::MusicPlayer.Properties.Resources.Edit;
-            this.btnEdit.Location = new System.Drawing.Point(373, 130);
+            this.btnEdit.Location = new System.Drawing.Point(373, 137);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(32, 32);
             this.btnEdit.TabIndex = 9;
@@ -149,7 +149,7 @@
             this.btnBrowseSongs.FlatAppearance.BorderSize = 0;
             this.btnBrowseSongs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowseSongs.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnBrowseSongs.Location = new System.Drawing.Point(335, 61);
+            this.btnBrowseSongs.Location = new System.Drawing.Point(335, 68);
             this.btnBrowseSongs.Name = "btnBrowseSongs";
             this.btnBrowseSongs.Size = new System.Drawing.Size(32, 32);
             this.btnBrowseSongs.TabIndex = 8;
@@ -163,7 +163,7 @@
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Image = global::MusicPlayer.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(373, 22);
+            this.btnSave.Location = new System.Drawing.Point(373, 29);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 32);
             this.btnSave.TabIndex = 4;
@@ -177,7 +177,7 @@
             this.btnBrowsePath.FlatAppearance.BorderSize = 0;
             this.btnBrowsePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowsePath.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnBrowsePath.Location = new System.Drawing.Point(335, 22);
+            this.btnBrowsePath.Location = new System.Drawing.Point(335, 29);
             this.btnBrowsePath.Name = "btnBrowsePath";
             this.btnBrowsePath.Size = new System.Drawing.Size(32, 32);
             this.btnBrowsePath.TabIndex = 1;
@@ -189,7 +189,7 @@
             this.checkFileNames.AutoSize = true;
             this.checkFileNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkFileNames.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkFileNames.Location = new System.Drawing.Point(192, 105);
+            this.checkFileNames.Location = new System.Drawing.Point(192, 112);
             this.checkFileNames.Name = "checkFileNames";
             this.checkFileNames.Size = new System.Drawing.Size(15, 14);
             this.checkFileNames.TabIndex = 13;
@@ -201,7 +201,7 @@
             this.lblCheckFilenames.AutoSize = true;
             this.lblCheckFilenames.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCheckFilenames.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblCheckFilenames.Location = new System.Drawing.Point(12, 99);
+            this.lblCheckFilenames.Location = new System.Drawing.Point(12, 106);
             this.lblCheckFilenames.Name = "lblCheckFilenames";
             this.lblCheckFilenames.Size = new System.Drawing.Size(162, 20);
             this.lblCheckFilenames.TabIndex = 14;

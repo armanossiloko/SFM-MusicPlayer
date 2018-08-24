@@ -294,7 +294,7 @@ namespace MusicPlayer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.ClientSize = new System.Drawing.Size(432, 140);
+            this.ClientSize = new System.Drawing.Size(434, 141);
             this.Controls.Add(this.songProgressBar);
             this.Controls.Add(this.lblDuration);
             this.Controls.Add(this.btnInfo);
@@ -310,6 +310,7 @@ namespace MusicPlayer
             this.Controls.Add(this.btnActivation);
             this.Controls.Add(this.lblAlbum);
             this.ForeColor = System.Drawing.SystemColors.Control;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";

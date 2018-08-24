@@ -1,6 +1,6 @@
 # SFM Music Player
 
-![](https://i.imgur.com/NGc4PtL.png "SFM Music Player Preview")
+![](https://i.imgur.com/RfT0xxi.png "SFM Music Player Preview")
 
 This is a minimalistic MP3 player coded in C#. It originally started as a personal idea due to me searching for a small music player that would be in the bottom right corner of my desktop, which I never managed to find.
 
@@ -12,14 +12,14 @@ When loading a CSV file, the player will look for MP3 files based on the content
 
 ## Settings
 
-![](https://i.imgur.com/GTB1HTU.png "Settings Form")
+![](https://i.imgur.com/n9xUjhG.png "Settings Form")
 
 
 The "Default Search Path" represents the default directory that you will be redirected to when you browse for a song to play.
 
 To "Edit ID3 Tags", first click on the Browse button, select an MP3 of your choice, click on the "Right Arrow" button (next to the Browse button) and fill the form with the info such as Artist, Title, Album. Beside that, the Browse button on that form will allow you choose an image (album art) that will be displayed when playing the song. Clicking on the Arrow button on this form will save your info.
 
-![](https://i.imgur.com/KYCU7Uz.png "ID3 Tags")
+![](https://i.imgur.com/aWRMdGy.png "ID3 Tags")
 
 From the Settings (which can be accessed directly via the Settings button), you can create your own CSV playlist (whose content will be based on the ID3 tags of the file - if those aren't present, the content of the CSV will be derived from the filename, which SHOULD follow the `Artist - Title.mp3` pattern).
 
