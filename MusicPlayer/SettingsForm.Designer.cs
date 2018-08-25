@@ -34,13 +34,13 @@
             this.txtDBName = new System.Windows.Forms.TextBox();
             this.txtSongPath = new System.Windows.Forms.TextBox();
             this.lblEditSongID3 = new System.Windows.Forms.Label();
+            this.checkFileNames = new System.Windows.Forms.CheckBox();
+            this.lblCheckFilenames = new System.Windows.Forms.Label();
             this.btnOpenSong = new MusicPlayer.Classes.NewButton();
             this.btnEdit = new MusicPlayer.Classes.NewButton();
             this.btnBrowseSongs = new MusicPlayer.Classes.NewButton();
             this.btnSave = new MusicPlayer.Classes.NewButton();
             this.btnBrowsePath = new MusicPlayer.Classes.NewButton();
-            this.checkFileNames = new System.Windows.Forms.CheckBox();
-            this.lblCheckFilenames = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtDefaultPath
@@ -57,11 +57,11 @@
             // lblDefaultPath
             // 
             this.lblDefaultPath.AutoSize = true;
-            this.lblDefaultPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDefaultPath.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDefaultPath.ForeColor = System.Drawing.SystemColors.Window;
             this.lblDefaultPath.Location = new System.Drawing.Point(12, 37);
             this.lblDefaultPath.Name = "lblDefaultPath";
-            this.lblDefaultPath.Size = new System.Drawing.Size(157, 20);
+            this.lblDefaultPath.Size = new System.Drawing.Size(148, 21);
             this.lblDefaultPath.TabIndex = 3;
             this.lblDefaultPath.Text = "Default Search Path:";
             this.lblDefaultPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -69,11 +69,11 @@
             // lblCreateDB
             // 
             this.lblCreateDB.AutoSize = true;
-            this.lblCreateDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCreateDB.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCreateDB.ForeColor = System.Drawing.SystemColors.Window;
             this.lblCreateDB.Location = new System.Drawing.Point(12, 77);
             this.lblCreateDB.Name = "lblCreateDB";
-            this.lblCreateDB.Size = new System.Drawing.Size(172, 20);
+            this.lblCreateDB.Size = new System.Drawing.Size(159, 21);
             this.lblCreateDB.TabIndex = 5;
             this.lblCreateDB.Text = "Create CSV Database:";
             this.lblCreateDB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -105,14 +105,38 @@
             // lblEditSongID3
             // 
             this.lblEditSongID3.AutoSize = true;
-            this.lblEditSongID3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEditSongID3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEditSongID3.ForeColor = System.Drawing.SystemColors.Window;
             this.lblEditSongID3.Location = new System.Drawing.Point(12, 143);
             this.lblEditSongID3.Name = "lblEditSongID3";
-            this.lblEditSongID3.Size = new System.Drawing.Size(110, 20);
+            this.lblEditSongID3.Size = new System.Drawing.Size(101, 21);
             this.lblEditSongID3.TabIndex = 10;
             this.lblEditSongID3.Text = "Edit ID3 Tags:";
             this.lblEditSongID3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // checkFileNames
+            // 
+            this.checkFileNames.AutoSize = true;
+            this.checkFileNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkFileNames.ForeColor = System.Drawing.SystemColors.Window;
+            this.checkFileNames.Location = new System.Drawing.Point(192, 112);
+            this.checkFileNames.Name = "checkFileNames";
+            this.checkFileNames.Size = new System.Drawing.Size(15, 14);
+            this.checkFileNames.TabIndex = 13;
+            this.checkFileNames.UseVisualStyleBackColor = true;
+            this.checkFileNames.CheckedChanged += new System.EventHandler(this.checkFileNames_CheckedChanged);
+            // 
+            // lblCheckFilenames
+            // 
+            this.lblCheckFilenames.AutoSize = true;
+            this.lblCheckFilenames.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheckFilenames.ForeColor = System.Drawing.SystemColors.Window;
+            this.lblCheckFilenames.Location = new System.Drawing.Point(12, 106);
+            this.lblCheckFilenames.Name = "lblCheckFilenames";
+            this.lblCheckFilenames.Size = new System.Drawing.Size(171, 21);
+            this.lblCheckFilenames.TabIndex = 14;
+            this.lblCheckFilenames.Text = "Base CSV on filenames:";
+            this.lblCheckFilenames.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnOpenSong
             // 
@@ -183,30 +207,6 @@
             this.btnBrowsePath.TabIndex = 1;
             this.btnBrowsePath.UseVisualStyleBackColor = true;
             this.btnBrowsePath.Click += new System.EventHandler(this.btnBrowsePath_Click);
-            // 
-            // checkFileNames
-            // 
-            this.checkFileNames.AutoSize = true;
-            this.checkFileNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkFileNames.ForeColor = System.Drawing.SystemColors.Window;
-            this.checkFileNames.Location = new System.Drawing.Point(192, 112);
-            this.checkFileNames.Name = "checkFileNames";
-            this.checkFileNames.Size = new System.Drawing.Size(15, 14);
-            this.checkFileNames.TabIndex = 13;
-            this.checkFileNames.UseVisualStyleBackColor = true;
-            this.checkFileNames.CheckedChanged += new System.EventHandler(this.checkFileNames_CheckedChanged);
-            // 
-            // lblCheckFilenames
-            // 
-            this.lblCheckFilenames.AutoSize = true;
-            this.lblCheckFilenames.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckFilenames.ForeColor = System.Drawing.SystemColors.Window;
-            this.lblCheckFilenames.Location = new System.Drawing.Point(12, 106);
-            this.lblCheckFilenames.Name = "lblCheckFilenames";
-            this.lblCheckFilenames.Size = new System.Drawing.Size(162, 20);
-            this.lblCheckFilenames.TabIndex = 14;
-            this.lblCheckFilenames.Text = "Include paths in CSV:";
-            this.lblCheckFilenames.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SettingsForm
             // 

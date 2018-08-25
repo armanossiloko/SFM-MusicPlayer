@@ -14,6 +14,7 @@ using System.Drawing.Text;
 using Mp3Lib;
 using TagLib;
 using System.Runtime.InteropServices;
+using ColorSlider;
 
 namespace MusicPlayer
 {
@@ -51,7 +52,7 @@ namespace MusicPlayer
         Image RepeatON = Image.FromFile(@"..\..\Assets\RepeatON.png");
         Image Settings = Image.FromFile(@"..\..\Assets\Settings.png");
         Image Browse = Image.FromFile(@"..\..\Assets\Browse.png");
-        Image Logo = Image.FromFile(@"..\..\Assets\AlbumArt.png");
+        Image DefaultAlbumArt = Image.FromFile(@"..\..\Assets\AlbumArt.png");
         Image Exit = Image.FromFile(@"..\..\Assets\Close.png");
         Image Minimize = Image.FromFile(@"..\..\Assets\Minimize.png");
 
@@ -79,35 +80,69 @@ namespace MusicPlayer
             Choose.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
             Choose.MediaError += new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
 
-            UseCustomFont(@"..\..\Assets\segoeui.ttf", 18, this.lblTitle);
-            UseCustomFont(@"..\..\Assets\segoeui.ttf", 12, this.lblAlbum);
-            UseCustomFont(@"..\..\Assets\segoeui.ttf", 14, this.lblPerformer);
+            UseCustomFont(@"..\..\Assets\Fonts\segoeui.ttf", 18, this.lblTitle);
+            UseCustomFont(@"..\..\Assets\Fonts\segoeui.ttf", 12, this.lblAlbum);
+            UseCustomFont(@"..\..\Assets\Fonts\segoeui.ttf", 14, this.lblPerformer);
 
-            this.picAlbum.Image = Logo;
+            this.picAlbum.Image = DefaultAlbumArt;
 
             CSVFilesList = false;
+
+            this.volumeSlider.Scroll += new ScrollEventHandler(volumeSlider_Scroll);
+
+            this.volumeSlider.BarInnerColor = Color.FromArgb(87, 94, 110);
+            this.volumeSlider.BarPenColorTop = Color.FromArgb(87, 94, 110);
+            this.volumeSlider.BarPenColorBottom = Color.FromArgb(87, 94, 110);
+
+            this.volumeSlider.ElapsedInnerColor = Color.White;
+            this.volumeSlider.ElapsedPenColorTop = Color.White;
+            this.volumeSlider.ElapsedPenColorBottom = Color.White;
+
+            this.volumeSlider.DrawSemitransparentThumb = false;
+            this.volumeSlider.Value = 50;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == (Keys.Alt | Keys.N))
+            if ((keyData == (Keys.Alt | Keys.N)) || (keyData == (Keys.MediaNextTrack))) // Next Song
             {
                 NextSong();
                 return true;
             }
-            else if (keyData == (Keys.Alt | Keys.B))
+            else if ((keyData == (Keys.Alt | Keys.B)) || (keyData == (Keys.MediaPreviousTrack))) // Previous Song
             {
-                if (CurrentSong > 0)
+                PreviousSong();
+                return true;
+            }
+            /*else if (keyData == (Keys.MediaStop))
+            {
+                Choose.controls.stop();
+                return true;
+            }*/
+            else if (keyData == (Keys.MediaPlayPause))
+            {
+                if (IsPlaying)
                 {
-                    Choose.URL = Music.ElementAt(CurrentSong - 1);
-                    if (IsPlaying == false)
-                    {
-                        IsPlaying = true;
-                        btnActivation.Image = Pause;
-                    }
-                    CurrentSong--;
-                    SetDetails(CurrentSong);
+                    Choose.controls.pause();
+                    IsPlaying = false;
                 }
+                else
+                {
+                    Choose.controls.play();
+                    IsPlaying = true;
+                }
+                return true;
+            }
+            else if (keyData == (Keys.Control | Keys.O)) // Browse for songs
+            {
+                EventArgs e = new EventArgs();
+                btnBrowse_Click("", e);
+                return true;
+            }
+            else if (keyData == (Keys.Control | Keys.I))
+            {
+                AboutForm about = new AboutForm();
+                about.Show();
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -213,6 +248,7 @@ namespace MusicPlayer
             try
             {
                 songProgressBar.Value = (int)this.Choose.controls.currentPosition;
+                this.lblCurrentMark.Text = Choose.controls.currentPositionString;
             }
             catch (Exception ex)
             {
@@ -411,7 +447,7 @@ namespace MusicPlayer
                 }
                 catch (Exception x)
                 {
-                    this.picAlbum.Image = Logo;
+                    this.picAlbum.Image = DefaultAlbumArt;
                 }
 
                 newTitle = mp3.TagHandler.Title;
@@ -439,6 +475,8 @@ namespace MusicPlayer
                 this.lblPerformer.Text = performer;
                 this.lblAlbum.Text = album;
             }
+
+            Choose.settings.volume = this.volumeSlider.Value;
         }
 
         void SetDetails(string path)
@@ -481,7 +519,7 @@ namespace MusicPlayer
                 }
                 catch (Exception x)
                 {
-                    this.picAlbum.Image = Logo;
+                    this.picAlbum.Image = DefaultAlbumArt;
                 }
 
                 newTitle = mp3.TagHandler.Title;
@@ -517,9 +555,11 @@ namespace MusicPlayer
                 this.lblPerformer.Text = performer;
                 this.lblAlbum.Text = album;
             }
+
+            Choose.settings.volume = this.volumeSlider.Value;
         }
 
-        void UseCustomFont(string name, int size, Label label)
+        public static void UseCustomFont(string name, int size, Label label)
         {
             PrivateFontCollection modernFont = new PrivateFontCollection();
             modernFont.AddFontFile(name);
@@ -593,6 +633,21 @@ namespace MusicPlayer
         {
             MessageBox.Show("Cannot play media file.");
             //this.Close();
+        }
+
+        void PreviousSong()
+        {
+            if (CurrentSong > 0)
+            {
+                Choose.URL = Music.ElementAt(CurrentSong - 1);
+                if (IsPlaying == false)
+                {
+                    IsPlaying = true;
+                    btnActivation.Image = Pause;
+                }
+                CurrentSong--;
+                SetDetails(CurrentSong);
+            }
         }
 
         void NextSong()
@@ -736,6 +791,11 @@ namespace MusicPlayer
         {
             AboutForm about = new AboutForm();
             about.Show();
+        }
+
+        private void volumeSlider_Scroll(object sender, ScrollEventArgs e)
+        {
+            Choose.settings.volume = this.volumeSlider.Value;
         }
     }
 }

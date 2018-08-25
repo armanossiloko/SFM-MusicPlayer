@@ -1,6 +1,6 @@
 # SFM Music Player
 
-![](https://i.imgur.com/RfT0xxi.png "SFM Music Player Preview")
+![](https://i.imgur.com/qcfUxYl.png "SFM Music Player Preview")
 
 This is a minimalistic MP3 player coded in C#. It originally started as a personal idea due to me searching for a small music player that would be in the bottom right corner of my desktop, which I never managed to find.
 
@@ -30,6 +30,7 @@ For now, clicking on the Info icon will open up some base info about the player 
 # Credits:
 
 - Crispy 
+- Fabrice Lacharme ([Volume Slider](https://github.com/fabricelacharme/ColorSlider)
 - Icons8 (Graphics)
 - Mono Project (TagLib Sharp)
 - Pixel Perfect (Icon)

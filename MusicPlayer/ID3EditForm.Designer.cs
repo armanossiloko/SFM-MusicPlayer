@@ -43,11 +43,11 @@
             // lblAlbum
             // 
             this.lblAlbum.AutoSize = true;
-            this.lblAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAlbum.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlbum.ForeColor = System.Drawing.SystemColors.Window;
             this.lblAlbum.Location = new System.Drawing.Point(12, 73);
             this.lblAlbum.Name = "lblAlbum";
-            this.lblAlbum.Size = new System.Drawing.Size(58, 20);
+            this.lblAlbum.Size = new System.Drawing.Size(59, 21);
             this.lblAlbum.TabIndex = 5;
             this.lblAlbum.Text = "Album:";
             this.lblAlbum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -64,11 +64,11 @@
             // lblArtist
             // 
             this.lblArtist.AutoSize = true;
-            this.lblArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArtist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblArtist.ForeColor = System.Drawing.SystemColors.Window;
             this.lblArtist.Location = new System.Drawing.Point(12, 112);
             this.lblArtist.Name = "lblArtist";
-            this.lblArtist.Size = new System.Drawing.Size(50, 20);
+            this.lblArtist.Size = new System.Drawing.Size(50, 21);
             this.lblArtist.TabIndex = 7;
             this.lblArtist.Text = "Artist:";
             this.lblArtist.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -85,11 +85,11 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.Window;
             this.lblTitle.Location = new System.Drawing.Point(12, 33);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(42, 20);
+            this.lblTitle.Size = new System.Drawing.Size(42, 21);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Title:";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

@@ -60,6 +60,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ColorSlider">
+      <HintPath>Libraries\ColorSlider.dll</HintPath>
+    </Reference>
     <Reference Include="Id3Lib">
       <HintPath>Libraries\Id3Lib.dll</HintPath>
     </Reference>
@@ -263,6 +266,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Header.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\VolThumb.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -116,7 +116,7 @@ namespace MusicPlayer
 
         public void AppInfo()
         {
-            string AppVer = "v0.07";
+            string AppVer = "v0.08";
             string Stability = "Beta";
             string Creator = "Arman Ossi Loko";
             string Copyright = "Copyright " + Creator + " © 2018";
