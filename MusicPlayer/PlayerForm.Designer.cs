@@ -20,6 +20,9 @@ namespace MusicPlayer
             {
                 components.Dispose();
             }
+            UnregisterHotKey(this.Handle, PlayKey);
+            UnregisterHotKey(this.Handle, NextKey);
+            UnregisterHotKey(this.Handle, PreviousKey);
             base.Dispose(disposing);
         }
 

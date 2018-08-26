@@ -30,7 +30,7 @@ For now, clicking on the Info icon will open up some base info about the player 
 # Credits:
 
 - Crispy 
-- Fabrice Lacharme ([Volume Slider](https://github.com/fabricelacharme/ColorSlider)
+- Fabrice Lacharme ([Volume Slider](https://github.com/fabricelacharme/ColorSlider))
 - Icons8 (Graphics)
 - Mono Project (TagLib Sharp)
 - Pixel Perfect (Icon)

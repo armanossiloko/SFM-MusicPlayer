@@ -21,6 +21,15 @@ namespace MusicPlayer
     enum PlayState { OneSong, MultipleSongs, CSVPlaylist, CSVFilePlaylist };
     public partial class MainForm : Form
     {
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        [DllImport("user32.dll")]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        const int PlayKey = 1;
+        const int NextKey = 2;
+        const int PreviousKey = 3;
+
         PlayState State;
 
         WindowsMediaPlayer Choose;
@@ -100,43 +109,34 @@ namespace MusicPlayer
 
             this.volumeSlider.DrawSemitransparentThumb = false;
             this.volumeSlider.Value = 50;
+
+            RegisterHotKey(this.Handle, PlayKey, 0, (int)Keys.MediaPlayPause);
+            RegisterHotKey(this.Handle, NextKey, 0, (int)Keys.MediaNextTrack);
+            RegisterHotKey(this.Handle, PreviousKey, 0, (int)Keys.MediaPreviousTrack);
+        }
+
+        protected override void WndProc(ref Message msg)
+        {
+            if (msg.Msg == 0x0312 && msg.WParam.ToInt32() == PlayKey)
+            {
+                PlayPause();
+            }
+            else if (msg.Msg == 0x0312 && msg.WParam.ToInt32() == NextKey)
+            {
+                NextSong();
+            }
+            else if (msg.Msg == 0x0312 && msg.WParam.ToInt32() == PreviousKey)
+            {
+                PreviousSong();
+            }
+            base.WndProc(ref msg);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if ((keyData == (Keys.Alt | Keys.N)) || (keyData == (Keys.MediaNextTrack))) // Next Song
+            if (keyData == (Keys.Control | Keys.O)) // Browse for songs
             {
-                NextSong();
-                return true;
-            }
-            else if ((keyData == (Keys.Alt | Keys.B)) || (keyData == (Keys.MediaPreviousTrack))) // Previous Song
-            {
-                PreviousSong();
-                return true;
-            }
-            /*else if (keyData == (Keys.MediaStop))
-            {
-                Choose.controls.stop();
-                return true;
-            }*/
-            else if (keyData == (Keys.MediaPlayPause))
-            {
-                if (IsPlaying)
-                {
-                    Choose.controls.pause();
-                    IsPlaying = false;
-                }
-                else
-                {
-                    Choose.controls.play();
-                    IsPlaying = true;
-                }
-                return true;
-            }
-            else if (keyData == (Keys.Control | Keys.O)) // Browse for songs
-            {
-                EventArgs e = new EventArgs();
-                btnBrowse_Click("", e);
+                SelectSong();
                 return true;
             }
             else if (keyData == (Keys.Control | Keys.I))
@@ -258,6 +258,58 @@ namespace MusicPlayer
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
+            SelectSong();
+        }
+
+        private void btnActivation_Click(object sender, EventArgs e)
+        {
+            PlayPause();
+            //if (OriginalMusic != null)
+            //{
+            //    if (IsPlaying == false)
+            //    {
+            //        IsPlaying = true;
+            //        btnActivation.Image = Pause;
+            //        Choose.controls.play();
+            //    }
+            //    else
+            //    {
+            //        IsPlaying = false;
+            //        btnActivation.Image = Play;
+            //        Choose.controls.pause();
+            //    }
+            //}
+        }
+
+        private void InitializeDefaultSettings()
+        {
+            this.Shuffle = false;
+            this.IsPlaying = false;
+            this.btnShuffle.Image = ShuffleOff;
+            this.btnActivation.Image = Play;
+        }
+
+        private void PlayPause()
+        {
+            if (OriginalMusic != null)
+            {
+                if (IsPlaying == false)
+                {
+                    IsPlaying = true;
+                    btnActivation.Image = Pause;
+                    Choose.controls.play();
+                }
+                else
+                {
+                    IsPlaying = false;
+                    btnActivation.Image = Play;
+                    Choose.controls.pause();
+                }
+            }
+        }
+
+        private void SelectSong()
+        {
             OpenFileDialog Open = new OpenFileDialog();
             Open.Filter = "MP3 Files|*.mp3|CSV Files|*.csv" /*+ "|All Files|*.*"*/;
             Open.InitialDirectory = MusicPlayer.SettingsForm.Path();
@@ -299,7 +351,7 @@ namespace MusicPlayer
                         SongDetails = null;
                         GlobalPath = null;
                         List<string[]> vs = CSV.Import(Open.FileName, ',');
-                        
+
                         OriginalMusic = new List<string>();
                         for (int i = 0; i < vs.Count; i++)
                         {
@@ -318,8 +370,6 @@ namespace MusicPlayer
 
                         InitializeDefaultSettings();
                     }
-
-
                 }
                 else //.mp3
                 {
@@ -363,33 +413,6 @@ namespace MusicPlayer
                     }
                 }
             }
-        }
-
-        private void btnActivation_Click(object sender, EventArgs e)
-        {
-            if (OriginalMusic != null)
-            {
-                if (IsPlaying == false)
-                {
-                    IsPlaying = true;
-                    btnActivation.Image = Pause;
-                    Choose.controls.play();
-                }
-                else
-                {
-                    IsPlaying = false;
-                    btnActivation.Image = Play;
-                    Choose.controls.pause();
-                }
-            }
-        }
-
-        private void InitializeDefaultSettings()
-        {
-            this.Shuffle = false;
-            this.IsPlaying = false;
-            this.btnShuffle.Image = ShuffleOff;
-            this.btnActivation.Image = Play;
         }
 
         //Take full path to .csv and return array of song details
@@ -693,17 +716,7 @@ namespace MusicPlayer
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            if (CurrentSong > 0)
-            {
-                Choose.URL = Music.ElementAt(CurrentSong - 1);
-                if (IsPlaying == false)
-                {
-                    IsPlaying = true;
-                    btnActivation.Image = Pause;
-                }
-                CurrentSong--;
-                SetDetails(CurrentSong);
-            }
+            PreviousSong();
         }
 
         private void btnShuffle_Click(object sender, EventArgs e)

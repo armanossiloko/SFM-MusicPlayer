@@ -22,6 +22,7 @@ namespace MusicPlayer.Classes
                 Icon = Resources.AppIcon,
                 ContextMenu = new ContextMenu(new MenuItem[] {
                 new MenuItem("Show", Show),
+                new MenuItem("About", About),
                 new MenuItem("Exit", Exit)
             }),
                 Visible = true
@@ -39,6 +40,12 @@ namespace MusicPlayer.Classes
         {
             //TrayIcon.Visible = false;
             Application.Exit();
+        }
+
+        void About(object sender, EventArgs e)
+        {
+            AboutForm about = new AboutForm();
+            about.Show();
         }
 
         void Show(object sender, EventArgs e)

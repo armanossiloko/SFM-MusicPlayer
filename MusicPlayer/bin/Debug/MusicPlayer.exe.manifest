@@ -102,14 +102,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MusicPlayer.exe" size="144808">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MusicPlayer.exe" size="145320">
       <assemblyIdentity name="MusicPlayer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DYH61FeoMBJPIPb7Il5OMF4S3bhWsWQl4W4fGyoHZPw=</dsig:DigestValue>
+        <dsig:DigestValue>LKJw69Fj+m7jTB0j1tH5pQhjVN0l2tORjrGMkTAp8ww=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
