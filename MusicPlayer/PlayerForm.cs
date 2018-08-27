@@ -54,7 +54,6 @@ namespace MusicPlayer
         Image Pause = Image.FromFile(@"..\..\Assets\Pause.png");
         Image Next = Image.FromFile(@"..\..\Assets\Next.png");
         Image Previous = Image.FromFile(@"..\..\Assets\Previous.png");
-        Image About = Image.FromFile(@"..\..\Assets\About.png");
         Image ShuffleOff = Image.FromFile(@"..\..\Assets\Shuffle.png");
         Image ShuffleON = Image.FromFile(@"..\..\Assets\ShuffleON.png");
         Image RepeatOff = Image.FromFile(@"..\..\Assets\Repeat.png");
@@ -264,21 +263,6 @@ namespace MusicPlayer
         private void btnActivation_Click(object sender, EventArgs e)
         {
             PlayPause();
-            //if (OriginalMusic != null)
-            //{
-            //    if (IsPlaying == false)
-            //    {
-            //        IsPlaying = true;
-            //        btnActivation.Image = Pause;
-            //        Choose.controls.play();
-            //    }
-            //    else
-            //    {
-            //        IsPlaying = false;
-            //        btnActivation.Image = Play;
-            //        Choose.controls.pause();
-            //    }
-            //}
         }
 
         private void InitializeDefaultSettings()
@@ -517,7 +501,7 @@ namespace MusicPlayer
             }
             catch (Exception e)
             {
-                performer = album = "";
+                performer = album = " ";
                 title = Path.GetFileName(@path);
             }
 
@@ -584,13 +568,20 @@ namespace MusicPlayer
 
         public static void UseCustomFont(string name, int size, Label label)
         {
-            PrivateFontCollection modernFont = new PrivateFontCollection();
-            modernFont.AddFontFile(name);
-            label.Font = new Font(modernFont.Families[0], size);
+            try
+            {
+                PrivateFontCollection modernFont = new PrivateFontCollection();
+                modernFont.AddFontFile(name);
+                label.Font = new Font(modernFont.Families[0], size);
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
-        // SUBJECT TO REMOVE
-        bool wasCalled = false; // Media stopped gets called twice
+        /* Media stopped event gets called twice when song ends, ultimately trying to skip 2 songs forward instead of one. */
+        bool wasCalled = false; 
         private void Player_PlayStateChange(int NewState)
         {
             if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsStopped)
@@ -605,7 +596,7 @@ namespace MusicPlayer
                             Choose.controls.play();
                         else
                         {
-                            IsPlaying = false; //SUBJECT TO REMOVE
+                            IsPlaying = false;
                             return;
                         }
                     }

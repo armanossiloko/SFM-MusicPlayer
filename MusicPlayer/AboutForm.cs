@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -116,7 +117,7 @@ namespace MusicPlayer
 
         public void AppInfo()
         {
-            string AppVer = "v0.09";
+            string AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             string Stability = "Beta";
             string Creator = "Arman Ossi Loko";
             string Copyright = "Copyright " + Creator + " © 2018";

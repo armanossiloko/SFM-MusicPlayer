@@ -72,12 +72,6 @@ namespace MusicPlayer
             this.btnRepeat.FlatAppearance.BorderSize = 0;
             this.btnRepeat.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(0, 255, 255, 255);
 
-            this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnInfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnInfo.FlatAppearance.BorderSize = 0;
-            this.btnInfo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(0, 255, 255, 255);
-
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -104,7 +98,6 @@ namespace MusicPlayer
             this.lblDuration = new System.Windows.Forms.Label();
             this.volumeSlider = new ColorSlider.ColorSlider();
             this.songProgressBar = new MusicPlayer.NewProgressBar();
-            this.btnInfo = new MusicPlayer.Classes.NewButton();
             this.btnSettings = new MusicPlayer.Classes.NewButton();
             this.btnShuffle = new MusicPlayer.Classes.NewButton();
             this.btnNext = new MusicPlayer.Classes.NewButton();
@@ -215,21 +208,6 @@ namespace MusicPlayer
             this.songProgressBar.Size = new System.Drawing.Size(238, 7);
             this.songProgressBar.TabIndex = 5;
             this.songProgressBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.songProgressBar_MouseClick);
-            // 
-            // btnInfo
-            // 
-            this.btnInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInfo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnInfo.FlatAppearance.BorderSize = 0;
-            this.btnInfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInfo.Location = new System.Drawing.Point(0, 0);
-            this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(20, 20);
-            this.btnInfo.TabIndex = 0;
-            this.btnInfo.UseVisualStyleBackColor = true;
-            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
             // btnSettings
             // 
@@ -348,7 +326,6 @@ namespace MusicPlayer
             this.Controls.Add(this.volumeSlider);
             this.Controls.Add(this.songProgressBar);
             this.Controls.Add(this.lblDuration);
-            this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.picAlbum);
             this.Controls.Add(this.lblPerformer);
             this.Controls.Add(this.lblTitle);
@@ -381,7 +358,6 @@ namespace MusicPlayer
         private Classes.NewButton btnSettings;
         private Classes.NewButton btnPrevious;
         private Classes.NewButton btnRepeat;
-        private Classes.NewButton btnInfo;
         private Classes.NewButton btnBrowse;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblPerformer;

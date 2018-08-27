@@ -78,3 +78,5 @@ C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Release\MusicPlay
 C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Release\MusicPlayer.csproj.CopyComplete
 C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Release\MusicPlayer.exe
 C:\Users\User\Documents\GitHub\SFM-MusicPlayer\MusicPlayer\obj\Release\MusicPlayer.pdb
+C:\Users\User\Documents\Visual Studio 2017\Projects\MusicPlayer\MusicPlayer\bin\Release\ColorSlider.dll
+C:\Users\User\Documents\Visual Studio 2017\Projects\MusicPlayer\MusicPlayer\bin\Release\ColorSlider.pdb

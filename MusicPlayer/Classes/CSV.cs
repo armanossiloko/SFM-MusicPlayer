@@ -72,7 +72,7 @@ namespace MusicPlayer.Classes
                         }
                         catch (Exception e)
                         {
-                            artist = album = "";
+                            artist = album = " ";
                             title = Path.GetFileName(@SongFiles[i]);
                         }
 
