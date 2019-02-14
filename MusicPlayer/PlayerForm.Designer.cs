@@ -97,6 +97,7 @@ namespace MusicPlayer
             this.picAlbum = new System.Windows.Forms.PictureBox();
             this.lblDuration = new System.Windows.Forms.Label();
             this.volumeSlider = new ColorSlider.ColorSlider();
+            this.lblCurrentMark = new System.Windows.Forms.Label();
             this.songProgressBar = new MusicPlayer.NewProgressBar();
             this.btnSettings = new MusicPlayer.Classes.NewButton();
             this.btnShuffle = new MusicPlayer.Classes.NewButton();
@@ -105,7 +106,6 @@ namespace MusicPlayer
             this.btnRepeat = new MusicPlayer.Classes.NewButton();
             this.btnPrevious = new MusicPlayer.Classes.NewButton();
             this.btnActivation = new MusicPlayer.Classes.NewButton();
-            this.lblCurrentMark = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picAlbum)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,7 +140,7 @@ namespace MusicPlayer
             this.lblAlbum.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAlbum.Location = new System.Drawing.Point(152, 71);
             this.lblAlbum.Name = "lblAlbum";
-            this.lblAlbum.Size = new System.Drawing.Size(280, 20);
+            this.lblAlbum.Size = new System.Drawing.Size(280, 22);
             this.lblAlbum.TabIndex = 1;
             this.lblAlbum.Text = "Album";
             this.lblAlbum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -159,7 +159,7 @@ namespace MusicPlayer
             // lblDuration
             // 
             this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(401, 125);
+            this.lblDuration.Location = new System.Drawing.Point(401, 126);
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(34, 13);
             this.lblDuration.TabIndex = 4;
@@ -198,12 +198,21 @@ namespace MusicPlayer
             this.volumeSlider.TickDivide = 0F;
             this.volumeSlider.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
+            // lblCurrentMark
+            // 
+            this.lblCurrentMark.AutoSize = true;
+            this.lblCurrentMark.Location = new System.Drawing.Point(121, 126);
+            this.lblCurrentMark.Name = "lblCurrentMark";
+            this.lblCurrentMark.Size = new System.Drawing.Size(34, 13);
+            this.lblCurrentMark.TabIndex = 7;
+            this.lblCurrentMark.Text = "00:00";
+            // 
             // songProgressBar
             // 
             this.songProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.songProgressBar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.songProgressBar.ForeColor = System.Drawing.Color.White;
-            this.songProgressBar.Location = new System.Drawing.Point(157, 130);
+            this.songProgressBar.Location = new System.Drawing.Point(157, 131);
             this.songProgressBar.Name = "songProgressBar";
             this.songProgressBar.Size = new System.Drawing.Size(238, 7);
             this.songProgressBar.TabIndex = 5;
@@ -216,7 +225,7 @@ namespace MusicPlayer
             this.btnSettings.FlatAppearance.BorderSize = 0;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Image = global::MusicPlayer.Properties.Resources.Settings;
-            this.btnSettings.Location = new System.Drawing.Point(400, 95);
+            this.btnSettings.Location = new System.Drawing.Point(400, 96);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(32, 32);
             this.btnSettings.TabIndex = 0;
@@ -230,7 +239,7 @@ namespace MusicPlayer
             this.btnShuffle.FlatAppearance.BorderSize = 0;
             this.btnShuffle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShuffle.Image = global::MusicPlayer.Properties.Resources.Shuffle;
-            this.btnShuffle.Location = new System.Drawing.Point(360, 95);
+            this.btnShuffle.Location = new System.Drawing.Point(360, 96);
             this.btnShuffle.Name = "btnShuffle";
             this.btnShuffle.Size = new System.Drawing.Size(32, 32);
             this.btnShuffle.TabIndex = 0;
@@ -244,7 +253,7 @@ namespace MusicPlayer
             this.btnNext.FlatAppearance.BorderSize = 0;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Image = global::MusicPlayer.Properties.Resources.Next;
-            this.btnNext.Location = new System.Drawing.Point(320, 95);
+            this.btnNext.Location = new System.Drawing.Point(320, 96);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(32, 32);
             this.btnNext.TabIndex = 0;
@@ -258,7 +267,7 @@ namespace MusicPlayer
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Image = global::MusicPlayer.Properties.Resources.Browse;
-            this.btnBrowse.Location = new System.Drawing.Point(160, 95);
+            this.btnBrowse.Location = new System.Drawing.Point(160, 96);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(32, 32);
             this.btnBrowse.TabIndex = 0;
@@ -272,7 +281,7 @@ namespace MusicPlayer
             this.btnRepeat.FlatAppearance.BorderSize = 0;
             this.btnRepeat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRepeat.Image = global::MusicPlayer.Properties.Resources.Repeat;
-            this.btnRepeat.Location = new System.Drawing.Point(200, 95);
+            this.btnRepeat.Location = new System.Drawing.Point(200, 96);
             this.btnRepeat.Name = "btnRepeat";
             this.btnRepeat.Size = new System.Drawing.Size(32, 32);
             this.btnRepeat.TabIndex = 0;
@@ -286,7 +295,7 @@ namespace MusicPlayer
             this.btnPrevious.FlatAppearance.BorderSize = 0;
             this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevious.Image = global::MusicPlayer.Properties.Resources.Previous;
-            this.btnPrevious.Location = new System.Drawing.Point(240, 95);
+            this.btnPrevious.Location = new System.Drawing.Point(240, 96);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(32, 32);
             this.btnPrevious.TabIndex = 0;
@@ -300,21 +309,12 @@ namespace MusicPlayer
             this.btnActivation.FlatAppearance.BorderSize = 0;
             this.btnActivation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActivation.Image = global::MusicPlayer.Properties.Resources.Play;
-            this.btnActivation.Location = new System.Drawing.Point(280, 95);
+            this.btnActivation.Location = new System.Drawing.Point(280, 96);
             this.btnActivation.Name = "btnActivation";
             this.btnActivation.Size = new System.Drawing.Size(32, 32);
             this.btnActivation.TabIndex = 0;
             this.btnActivation.UseVisualStyleBackColor = true;
             this.btnActivation.Click += new System.EventHandler(this.btnActivation_Click);
-            // 
-            // lblCurrentMark
-            // 
-            this.lblCurrentMark.AutoSize = true;
-            this.lblCurrentMark.Location = new System.Drawing.Point(121, 125);
-            this.lblCurrentMark.Name = "lblCurrentMark";
-            this.lblCurrentMark.Size = new System.Drawing.Size(34, 13);
-            this.lblCurrentMark.TabIndex = 7;
-            this.lblCurrentMark.Text = "00:00";
             // 
             // MainForm
             // 
@@ -322,13 +322,14 @@ namespace MusicPlayer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.ClientSize = new System.Drawing.Size(440, 140);
+            this.Controls.Add(this.lblPerformer);
+            this.Controls.Add(this.lblAlbum);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblCurrentMark);
             this.Controls.Add(this.volumeSlider);
             this.Controls.Add(this.songProgressBar);
             this.Controls.Add(this.lblDuration);
             this.Controls.Add(this.picAlbum);
-            this.Controls.Add(this.lblPerformer);
-            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnShuffle);
             this.Controls.Add(this.btnNext);
@@ -336,7 +337,6 @@ namespace MusicPlayer
             this.Controls.Add(this.btnRepeat);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnActivation);
-            this.Controls.Add(this.lblAlbum);
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.KeyPreview = true;
             this.MaximizeBox = false;

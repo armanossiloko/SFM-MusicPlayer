@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
 using MusicPlayer.Classes;
 using System.IO;
 using System.Drawing.Text;
 using Mp3Lib;
-using TagLib;
 using System.Runtime.InteropServices;
-using ColorSlider;
 
 namespace MusicPlayer
 {
@@ -216,7 +210,6 @@ namespace MusicPlayer
             {
                 this.Hide();
             }
-            //this.Close();
         }
 
         void Title_MouseUp(object sender, MouseEventArgs e)
@@ -725,6 +718,12 @@ namespace MusicPlayer
                 else
                 {
                     ShuffleList(Music, SongDetails);
+                    SetDetails(CurrentSong);
+
+                    //To be removed
+                    Choose.URL = Music.ElementAt(CurrentSong);
+                    IsPlaying = true;
+
                     this.btnShuffle.Image = ShuffleON;
                     Shuffle = true;
                 }
