@@ -44,20 +44,6 @@ namespace MusicPlayer
         private bool IsPlaying;
         public static bool CSVFilesList;
 
-        Image Play = Image.FromFile(@"..\..\Assets\Play.png");
-        Image Pause = Image.FromFile(@"..\..\Assets\Pause.png");
-        Image Next = Image.FromFile(@"..\..\Assets\Next.png");
-        Image Previous = Image.FromFile(@"..\..\Assets\Previous.png");
-        Image ShuffleOff = Image.FromFile(@"..\..\Assets\Shuffle.png");
-        Image ShuffleON = Image.FromFile(@"..\..\Assets\ShuffleON.png");
-        Image RepeatOff = Image.FromFile(@"..\..\Assets\Repeat.png");
-        Image RepeatON = Image.FromFile(@"..\..\Assets\RepeatON.png");
-        Image Settings = Image.FromFile(@"..\..\Assets\Settings.png");
-        Image Browse = Image.FromFile(@"..\..\Assets\Browse.png");
-        Image DefaultAlbumArt = Image.FromFile(@"..\..\Assets\AlbumArt.png");
-        Image Exit = Image.FromFile(@"..\..\Assets\Close.png");
-        Image Minimize = Image.FromFile(@"..\..\Assets\Minimize.png");
-
         private PictureBox TitleBar = new PictureBox();
         private PictureBox CloseForm = new PictureBox();
         private PictureBox MinimizeForm = new PictureBox();
@@ -82,15 +68,16 @@ namespace MusicPlayer
             Choose.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
             Choose.MediaError += new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
 
-            UseCustomFont(@"..\..\Assets\Fonts\segoeui.ttf", 18, this.lblTitle);
-            UseCustomFont(@"..\..\Assets\Fonts\segoeui.ttf", 12, this.lblAlbum);
-            UseCustomFont(@"..\..\Assets\Fonts\segoeui.ttf", 14, this.lblPerformer);
+            UseCustomFont(@"Assets\Fonts\segoeui.ttf", 18, this.lblTitle);
+            UseCustomFont(@"Assets\Fonts\segoeui.ttf", 12, this.lblAlbum);
+            UseCustomFont(@"Assets\Fonts\segoeui.ttf", 14, this.lblPerformer);
 
-            this.picAlbum.Image = DefaultAlbumArt;
+            this.picAlbum.Image = Buttons.DefaultAlbumArt;
 
             CSVFilesList = false;
 
             this.volumeSlider.Scroll += new ScrollEventHandler(volumeSlider_Scroll);
+            this.volumeSlider.DockChanged += volumeSlider_DockChanged;
 
             this.volumeSlider.BarInnerColor = Color.FromArgb(87, 94, 110);
             this.volumeSlider.BarPenColorTop = Color.FromArgb(87, 94, 110);
@@ -149,12 +136,12 @@ namespace MusicPlayer
             this.TitleBar.Width = this.Width;
             this.TitleBar.Height = 20;
             this.TitleBar.BackColor = Color.FromArgb(10, 11, 12);
-            this.TitleBar.Image = Image.FromFile(@"..\..\Assets\Headers\Header.png");
+            this.TitleBar.Image = Image.FromFile(@"Assets\Headers\Header.png");
             this.Controls.Add(this.TitleBar);
 
             this.CloseForm.Width = 20;
             this.CloseForm.Height = 20;
-            this.CloseForm.Image = new Bitmap(Exit, this.CloseForm.Size);
+            this.CloseForm.Image = new Bitmap(Buttons.Exit, this.CloseForm.Size);
             this.CloseForm.Location = new Point(this.Width - this.CloseForm.Width, 0);
             this.CloseForm.ForeColor = Color.Gray;
             this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
@@ -165,7 +152,7 @@ namespace MusicPlayer
 
             this.MinimizeForm.Width = 20;
             this.MinimizeForm.Height = 20;
-            this.MinimizeForm.Image = new Bitmap(Minimize, this.MinimizeForm.Size);
+            this.MinimizeForm.Image = new Bitmap(Buttons.Minimize, this.MinimizeForm.Size);
             this.MinimizeForm.Location = new Point(this.Width - this.CloseForm.Width - this.MinimizeForm.Width, 0);
             this.MinimizeForm.ForeColor = Color.Gray;
             this.MinimizeForm.BackColor = Color.FromArgb(10, 11, 12);
@@ -203,7 +190,7 @@ namespace MusicPlayer
         {
             if (sender.Equals(this.CloseForm))
             {
-                MyAppContext.TrayIcon.Visible = false;
+                SFMAppContext.TrayIcon.Visible = false;
                 Application.Exit();
             }
             else if (sender.Equals(this.MinimizeForm))
@@ -262,8 +249,8 @@ namespace MusicPlayer
         {
             this.Shuffle = false;
             this.IsPlaying = false;
-            this.btnShuffle.Image = ShuffleOff;
-            this.btnActivation.Image = Play;
+            this.btnShuffle.Image = Buttons.ShuffleOff;
+            this.btnActivation.Image = Buttons.Play;
         }
 
         private void PlayPause()
@@ -273,13 +260,13 @@ namespace MusicPlayer
                 if (IsPlaying == false)
                 {
                     IsPlaying = true;
-                    btnActivation.Image = Pause;
+                    btnActivation.Image = Buttons.Pause;
                     Choose.controls.play();
                 }
                 else
                 {
                     IsPlaying = false;
-                    btnActivation.Image = Play;
+                    btnActivation.Image = Buttons.Play;
                     Choose.controls.pause();
                 }
             }
@@ -447,7 +434,7 @@ namespace MusicPlayer
                 }
                 catch (Exception x)
                 {
-                    this.picAlbum.Image = DefaultAlbumArt;
+                    this.picAlbum.Image = Buttons.DefaultAlbumArt;
                 }
 
                 newTitle = mp3.TagHandler.Title;
@@ -519,7 +506,7 @@ namespace MusicPlayer
                 }
                 catch (Exception x)
                 {
-                    this.picAlbum.Image = DefaultAlbumArt;
+                    this.picAlbum.Image = Buttons.DefaultAlbumArt;
                 }
 
                 newTitle = mp3.TagHandler.Title;
@@ -597,7 +584,7 @@ namespace MusicPlayer
                     {
                         Choose.controls.play(); 
                         IsPlaying = true;
-                        btnActivation.Image = Pause;
+                        btnActivation.Image = Buttons.Pause;
                         return;
                     }
                 }
@@ -610,7 +597,7 @@ namespace MusicPlayer
             else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsPaused)
             {
                 IsPlaying = false;
-                btnActivation.Image = Play;
+                btnActivation.Image = Buttons.Play;
             }
             else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsPlaying)
             {
@@ -620,11 +607,11 @@ namespace MusicPlayer
                 t.Interval = 100;
                 t.Tick += new EventHandler(t_Tick);
 
-                btnActivation.Image = Pause;
+                btnActivation.Image = Buttons.Pause;
             }
             else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsMediaEnded)
             {
-                btnActivation.Image = Play;
+                btnActivation.Image = Buttons.Play;
                 IsPlaying = false;
             }
 
@@ -650,7 +637,7 @@ namespace MusicPlayer
                 if (IsPlaying == false)
                 {
                     IsPlaying = true;
-                    btnActivation.Image = Pause;
+                    btnActivation.Image = Buttons.Pause;
                 }
                 CurrentSong--;
                 SetDetails(CurrentSong);
@@ -712,7 +699,7 @@ namespace MusicPlayer
                     Music = new List<string>(OriginalMusic);
                     if (OriginalSongDetails != null)
                         SongDetails = new List<string[]>(OriginalSongDetails);
-                    this.btnShuffle.Image = ShuffleOff;
+                    this.btnShuffle.Image = Buttons.ShuffleOff;
                     Shuffle = false;
                 }
                 else
@@ -724,7 +711,7 @@ namespace MusicPlayer
                     Choose.URL = Music.ElementAt(CurrentSong);
                     IsPlaying = true;
 
-                    this.btnShuffle.Image = ShuffleON;
+                    this.btnShuffle.Image = Buttons.ShuffleON;
                     Shuffle = true;
                 }
             }
@@ -759,12 +746,12 @@ namespace MusicPlayer
             {
                 if (Repeat) //Turned on
                 {
-                    this.btnRepeat.Image = RepeatOff;
+                    this.btnRepeat.Image = Buttons.RepeatOff;
                     Repeat = false;
                 }
                 else
                 {
-                    this.btnRepeat.Image = RepeatON;
+                    this.btnRepeat.Image = Buttons.RepeatON;
                     Repeat = true;
                 }
             }
@@ -797,6 +784,11 @@ namespace MusicPlayer
         }
 
         private void volumeSlider_Scroll(object sender, ScrollEventArgs e)
+        {
+            Choose.settings.volume = this.volumeSlider.Value;
+        }
+
+        private void volumeSlider_DockChanged(object sender, EventArgs e)
         {
             Choose.settings.volume = this.volumeSlider.Value;
         }

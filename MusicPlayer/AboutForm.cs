@@ -1,31 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MusicPlayer
 {
     public partial class AboutForm : Form
     {
-        Image PlayerLogo = Image.FromFile(@"..\..\Assets\Logo.png");
-        Image Exit       = Image.FromFile(@"..\..\Assets\Close.png");
-        
-        private PictureBox TitleBar = new PictureBox();
-        private PictureBox CloseForm = new PictureBox();
-
-        private bool Drag = false;
-        private Point StartPoint = new Point(0, 0);
+        private readonly PictureBox _titleBar = new PictureBox();
+        private readonly PictureBox _closeForm = new PictureBox();
+        private bool _drag = false;
+        private Point _startPoint = new Point(0, 0);
 
         public AboutForm()
         {
             InitializeComponent();
-            this.CenterToScreen();
+            CenterToScreen();
             InitializeStyles();
             AppInfo();
             SetTitleBar();
@@ -33,84 +23,84 @@ namespace MusicPlayer
 
         private void InitializeStyles()
         {
-            this.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
-            this.lblVersion.ForeColor = System.Drawing.Color.White;
-            this.lblVNum.ForeColor = System.Drawing.Color.White;
+            this.BackColor = Color.FromArgb(0, 0, 0);
+            this.lblVersion.ForeColor = Color.White;
+            this.lblVNum.ForeColor = Color.White;
 
-            this.lblType.ForeColor = System.Drawing.Color.White;
-            this.lblForType.ForeColor = System.Drawing.Color.White;
+            this.lblType.ForeColor = Color.White;
+            this.lblForType.ForeColor = Color.White;
 
-            this.lblCopyright.ForeColor = System.Drawing.Color.White;
+            this.lblCopyright.ForeColor = Color.White;
         }
 
         private void SetTitleBar()
         {
             this.FormBorderStyle = FormBorderStyle.None;
 
-            this.TitleBar.Location = this.Location;
-            this.TitleBar.Width = this.Width;
-            this.TitleBar.Height = 20;
-            this.TitleBar.BackColor = Color.FromArgb(10, 11, 12);
-            this.TitleBar.Image = Image.FromFile(@"..\..\Assets\Headers\About.png");
-            this.TitleBar.Location = new Point(0, 0);
-            this.Controls.Add(this.TitleBar);
+            this._titleBar.Location = this.Location;
+            this._titleBar.Width = this.Width;
+            this._titleBar.Height = 20;
+            this._titleBar.BackColor = Color.FromArgb(10, 11, 12);
+            this._titleBar.Image = Image.FromFile(@"Assets\Headers\About.png");
+            this._titleBar.Location = new Point(0, 0);
+            this.Controls.Add(this._titleBar);
 
-            this.CloseForm.Width = 20;
-            this.CloseForm.Height = 20;
-            this.CloseForm.Image = new Bitmap(Exit, this.CloseForm.Size);
-            this.CloseForm.Location = new Point(this.Width - this.CloseForm.Width, 0);
-            this.CloseForm.ForeColor = Color.Gray;
-            this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
-            this.Controls.Add(this.CloseForm);
-            this.CloseForm.MouseEnter += new EventHandler(Control_MouseEnter);
-            this.CloseForm.MouseLeave += new EventHandler(Control_MouseLeave);
-            this.CloseForm.MouseClick += new MouseEventHandler(Control_MouseClick);
+            this._closeForm.Width = 20;
+            this._closeForm.Height = 20;
+            this._closeForm.Image = new Bitmap(Classes.Buttons.Exit, this._closeForm.Size);
+            this._closeForm.Location = new Point(this.Width - this._closeForm.Width, 0);
+            this._closeForm.ForeColor = Color.Gray;
+            this._closeForm.BackColor = Color.FromArgb(10, 11, 12);
+            this.Controls.Add(this._closeForm);
+            this._closeForm.MouseEnter += new EventHandler(Control_MouseEnter);
+            this._closeForm.MouseLeave += new EventHandler(Control_MouseLeave);
+            this._closeForm.MouseClick += new MouseEventHandler(Control_MouseClick);
 
-            this.TitleBar.MouseDown += new MouseEventHandler(Title_MouseDown);
-            this.TitleBar.MouseUp += new MouseEventHandler(Title_MouseUp);
-            this.TitleBar.MouseMove += new MouseEventHandler(Title_MouseMove);
+            this._titleBar.MouseDown += new MouseEventHandler(Title_MouseDown);
+            this._titleBar.MouseUp += new MouseEventHandler(Title_MouseUp);
+            this._titleBar.MouseMove += new MouseEventHandler(Title_MouseMove);
 
-            this.TitleBar.BringToFront();
-            this.CloseForm.BringToFront();
+            this._titleBar.BringToFront();
+            this._closeForm.BringToFront();
         }
 
         private void Control_MouseEnter(object sender, EventArgs e)
         {
-            if (sender.Equals(this.CloseForm))
-                this.CloseForm.BackColor = Color.FromArgb(240, 71, 71);
+            if (sender.Equals(this._closeForm))
+                this._closeForm.BackColor = Color.FromArgb(240, 71, 71);
         }
 
         private void Control_MouseLeave(object sender, EventArgs e)
         {
-            if (sender.Equals(this.CloseForm))
-                this.CloseForm.BackColor = Color.FromArgb(10, 11, 12);
+            if (sender.Equals(this._closeForm))
+                this._closeForm.BackColor = Color.FromArgb(10, 11, 12);
         }
 
         private void Control_MouseClick(object sender, MouseEventArgs e)
         {
-            if (sender.Equals(this.CloseForm))
+            if (sender.Equals(this._closeForm))
                 this.Close();
         }
 
         void Title_MouseUp(object sender, MouseEventArgs e)
         {
-            this.Drag = false;
+            this._drag = false;
         }
 
         void Title_MouseDown(object sender, MouseEventArgs e)
         {
-            this.StartPoint = e.Location;
-            this.Drag = true;
+            this._startPoint = e.Location;
+            this._drag = true;
         }
 
         void Title_MouseMove(object sender, MouseEventArgs e)
         {
-            if (this.Drag)
+            if (this._drag)
             {
                 Point p1 = new Point(e.X, e.Y);
                 Point p2 = this.PointToScreen(p1);
-                Point p3 = new Point(p2.X - this.StartPoint.X,
-                                     p2.Y - this.StartPoint.Y);
+                Point p3 = new Point(p2.X - this._startPoint.X,
+                                     p2.Y - this._startPoint.Y);
                 this.Location = p3;
             }
         }
@@ -118,15 +108,15 @@ namespace MusicPlayer
         public void AppInfo()
         {
             string AppVer = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            string Stability = "Beta";
+            string Stability = "Stable";
             string Creator = "Arman Ossi Loko";
-            string Copyright = "Copyright " + Creator + " © 2018";
+            string Copyright = $"Copyright {Creator} © 2018 - 2020";
 
             this.lblVNum.Text = AppVer;
             this.lblForType.Text = Stability;
             this.lblCopyright.Text = Copyright;
 
-            this.picLogo.Image = new Bitmap(PlayerLogo, this.picLogo.Size);
+            this.picLogo.Image = new Bitmap(Classes.Buttons.PlayerLogo, this.picLogo.Size);
         }
     }
 }
