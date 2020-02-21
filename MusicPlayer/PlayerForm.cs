@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Mp3Lib;
+using MusicPlayer.Classes;
+using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using WMPLib;
-using MusicPlayer.Classes;
-using System.IO;
-using System.Drawing.Text;
-using Mp3Lib;
 using System.Runtime.InteropServices;
+using WMPLib;
 
 namespace MusicPlayer
 {
@@ -23,10 +23,9 @@ namespace MusicPlayer
         const int PlayKey = 1;
         const int NextKey = 2;
         const int PreviousKey = 3;
-
-        PlayState State;
-
-        WindowsMediaPlayer Choose;
+        private PlayState _state;
+        private readonly WindowsMediaPlayer _choose;
+        private int _songCount;
 
         List<string> OriginalMusic;
         List<string> Music;
@@ -63,14 +62,16 @@ namespace MusicPlayer
             this.PrepareButtons();
             this.CurrentSong = -1;
 
-            Choose = new WindowsMediaPlayer();
+            _choose = new WindowsMediaPlayer();
 
-            Choose.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
-            Choose.MediaError += new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
+            _choose.PlayStateChange += new _WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
+            _choose.MediaError += new _WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
 
             UseCustomFont(@"Assets\Fonts\segoeui.ttf", 18, this.lblTitle);
             UseCustomFont(@"Assets\Fonts\segoeui.ttf", 12, this.lblAlbum);
             UseCustomFont(@"Assets\Fonts\segoeui.ttf", 14, this.lblPerformer);
+
+            _songCount = 0;
 
             this.picAlbum.Image = Buttons.DefaultAlbumArt;
 
@@ -226,10 +227,10 @@ namespace MusicPlayer
         {
             try
             {
-                songProgressBar.Value = (int)this.Choose.controls.currentPosition;
-                this.lblCurrentMark.Text = Choose.controls.currentPositionString;
+                songProgressBar.Value = (int)this._choose.controls.currentPosition;
+                this.lblCurrentMark.Text = _choose.controls.currentPositionString;
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -255,38 +256,40 @@ namespace MusicPlayer
 
         private void PlayPause()
         {
-            if (OriginalMusic != null)
+            if (OriginalMusic != null && OriginalMusic.Any())
             {
                 if (IsPlaying == false)
                 {
                     IsPlaying = true;
                     btnActivation.Image = Buttons.Pause;
-                    Choose.controls.play();
+                    _choose.controls.play();
                 }
                 else
                 {
                     IsPlaying = false;
                     btnActivation.Image = Buttons.Play;
-                    Choose.controls.pause();
+                    _choose.controls.pause();
                 }
             }
         }
 
         private void SelectSong()
         {
-            OpenFileDialog Open = new OpenFileDialog();
-            Open.Filter = "MP3 Files|*.mp3|CSV Files|*.csv" /*+ "|All Files|*.*"*/;
-            Open.InitialDirectory = MusicPlayer.SettingsForm.Path();
-            Open.Multiselect = true;
+            OpenFileDialog Open = new OpenFileDialog
+            {
+                Filter = "MP3 Files|*.mp3|CSV Files|*.csv" /*+ "|All Files|*.*"*/,
+                InitialDirectory = SettingsForm.Path(),
+                Multiselect = true
+            };
 
 
-            if (Open.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (Open.ShowDialog() == DialogResult.OK)
             {
                 if (Path.GetExtension(Open.FileName) == ".csv")
                 {
                     if (CSV.Import(Open.FileName, ',').ElementAt(0).Length != 1)
                     {
-                        State = PlayState.CSVPlaylist;
+                        _state = PlayState.CSVPlaylist;
 
                         PlaylistPath = Open.FileName;
                         GlobalPath = Path.GetDirectoryName(PlaylistPath) + "\\";
@@ -297,40 +300,41 @@ namespace MusicPlayer
 
 
                         CurrentSong = 0;
+                        _songCount = Music.Count();
                         string firstSong = Music[CurrentSong]; //Artist - Album.mp3
 
 
-                        Choose.URL = firstSong;
+                        _choose.URL = firstSong;
                         SetDetails(CurrentSong);
-                        Choose.controls.stop();
+                        _choose.controls.stop();
 
-                        lblDuration.Text = Choose.currentMedia.durationString;
+                        lblDuration.Text = _choose.currentMedia.durationString;
 
                         InitializeDefaultSettings();
                     }
                     else if (CSV.Import(Open.FileName, ',').ElementAt(0).Length == 1) // NOT TESTED
                     {
-                        State = PlayState.CSVFilePlaylist;
+                        _state = PlayState.CSVFilePlaylist;
 
                         SongDetails = null;
                         GlobalPath = null;
                         List<string[]> vs = CSV.Import(Open.FileName, ',');
 
                         OriginalMusic = new List<string>();
-                        for (int i = 0; i < vs.Count; i++)
+                        foreach (var item in vs)
                         {
-                            OriginalMusic.Add(vs.ElementAt(i)[0]);
+                            OriginalMusic.Add(item[0]);
                         }
                         Music = new List<string>(OriginalMusic);
 
 
                         CurrentSong = 0;
-                        Choose.URL = OriginalMusic.ElementAt(0);
+                        _choose.URL = OriginalMusic.ElementAt(0);
                         SetDetails(OriginalMusic.ElementAt(0));
 
-                        Choose.controls.stop();
+                        _choose.controls.stop();
 
-                        lblDuration.Text = Choose.currentMedia.durationString;
+                        lblDuration.Text = _choose.currentMedia.durationString;
 
                         InitializeDefaultSettings();
                     }
@@ -339,7 +343,7 @@ namespace MusicPlayer
                 {
                     if (Open.FileNames.Length == 1)
                     {
-                        State = PlayState.OneSong;
+                        _state = PlayState.OneSong;
                         SongDetails = null;
 
                         GlobalPath = Path.GetDirectoryName(Open.FileName) + "\\";
@@ -347,18 +351,18 @@ namespace MusicPlayer
                         Music = new List<string>(OriginalMusic);
 
                         CurrentSong = 0;
-                        Choose.URL = Open.FileName;
+                        _choose.URL = Open.FileName;
                         SetDetails(Open.FileName);
 
-                        Choose.controls.stop();
+                        _choose.controls.stop();
 
-                        lblDuration.Text = Choose.currentMedia.durationString;
+                        lblDuration.Text = _choose.currentMedia.durationString;
 
                         InitializeDefaultSettings();
                     }
                     else
                     {
-                        State = PlayState.MultipleSongs;
+                        _state = PlayState.MultipleSongs;
                         SongDetails = null;
 
                         GlobalPath = Path.GetDirectoryName(Open.FileName) + "\\";
@@ -366,12 +370,12 @@ namespace MusicPlayer
                         Music = new List<string>(OriginalMusic);
 
                         CurrentSong = 0;
-                        Choose.URL = Open.FileNames[CurrentSong];
+                        _choose.URL = Open.FileNames[CurrentSong];
                         SetDetails(Open.FileNames[CurrentSong]);
 
-                        Choose.controls.stop();
+                        _choose.controls.stop();
 
-                        lblDuration.Text = Choose.currentMedia.durationString;
+                        lblDuration.Text = _choose.currentMedia.durationString;
 
                         InitializeDefaultSettings();
                     }
@@ -391,19 +395,14 @@ namespace MusicPlayer
             List<string> vs = new List<string>();
             foreach (var item in SongDetails)
             {
-                vs.Add(GlobalPath + item[0] + " - " + item[1] + ".mp3");
+                vs.Add($"{GlobalPath}{item[0]} - {item[1]}.mp3");
             }
             return vs;
         }
 
         void SetDetails(int index)
         {
-            if (State == PlayState.MultipleSongs)
-            {
-                SetDetails(Music.ElementAt(CurrentSong));
-                return;
-            }
-            else if (State == PlayState.CSVFilePlaylist)
+            if (_state == PlayState.MultipleSongs || _state == PlayState.CSVFilePlaylist)
             {
                 SetDetails(Music.ElementAt(CurrentSong));
                 return;
@@ -412,27 +411,23 @@ namespace MusicPlayer
             string performer = SongDetails.ElementAt(index)[0];
             string songName = SongDetails.ElementAt(index)[1];
             string album = SongDetails.ElementAt(index)[2];
-            string fileName = Path.GetFileName(Music.ElementAt(index));
 
             string newTitle;
             string newAlbum;
             string newPerformer;
             string full = Music.ElementAt(index);
             Mp3File mp3 = new Mp3File(@full);
+
             try
             {
                 try
                 {
-                    //this.picAlbum.Image = mp3.TagHandler.Picture;
-                    /*Bitmap bitmap = new Bitmap(mp3.TagHandler.Picture, this.picAlbum.Size);
-                    this.picAlbum.Image = bitmap;*/
-
                     TagLib.File file = TagLib.File.Create(@full);
                     MemoryStream ms = new MemoryStream(file.Tag.Pictures[0].Data.Data);
-                    System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
+                    Image image = Image.FromStream(ms);
                     this.picAlbum.Image = new Bitmap(image, this.picAlbum.Size);
                 }
-                catch (Exception x)
+                catch
                 {
                     this.picAlbum.Image = Buttons.DefaultAlbumArt;
                 }
@@ -441,29 +436,29 @@ namespace MusicPlayer
                 newAlbum = mp3.TagHandler.Album;
                 newPerformer = mp3.TagHandler.Artist;
 
-                if (newTitle == "")
+                if (string.IsNullOrEmpty(newTitle))
                     throw new Exception("Title is empty");
                 else
                     this.lblTitle.Text = newTitle;
 
-                if (newPerformer == "")
+                if (string.IsNullOrEmpty(newPerformer))
                     throw new Exception("Performer is empty");
                 else
                     this.lblPerformer.Text = newPerformer;
 
-                if (newAlbum == "")
+                if (string.IsNullOrEmpty(newAlbum))
                     throw new Exception("Album is empty");
                 else
                     this.lblAlbum.Text = newAlbum;
             }
-            catch (Exception e)
+            catch
             {
                 this.lblTitle.Text = songName;
                 this.lblPerformer.Text = performer;
                 this.lblAlbum.Text = album;
             }
 
-            Choose.settings.volume = this.volumeSlider.Value;
+            _choose.settings.volume = this.volumeSlider.Value;
         }
 
         void SetDetails(string path)
@@ -479,7 +474,7 @@ namespace MusicPlayer
                 performer = fileName.Substring(0, minus - 1);
                 album = Path.GetFileName(path);
             }
-            catch (Exception e)
+            catch
             {
                 performer = album = " ";
                 title = Path.GetFileName(@path);
@@ -495,16 +490,12 @@ namespace MusicPlayer
             {
                 try
                 {
-                    //this.picAlbum.Image = mp3.TagHandler.Picture;
-                    /*Bitmap bitmap = new Bitmap(mp3.TagHandler.Picture, this.picAlbum.Size);
-                    this.picAlbum.Image = bitmap;*/
-
                     TagLib.File file = TagLib.File.Create(@path);
                     MemoryStream ms = new MemoryStream(file.Tag.Pictures[0].Data.Data);
-                    System.Drawing.Image image = System.Drawing.Image.FromStream(ms);
+                    Image image = Image.FromStream(ms);
                     this.picAlbum.Image = new Bitmap(image, this.picAlbum.Size);
                 }
-                catch (Exception x)
+                catch
                 {
                     this.picAlbum.Image = Buttons.DefaultAlbumArt;
                 }
@@ -513,37 +504,35 @@ namespace MusicPlayer
                 newAlbum = mp3.TagHandler.Album;
                 newPerformer = mp3.TagHandler.Artist;
 
-                if (newTitle == "")
-                    throw new Exception("Title is empty");
+                if (string.IsNullOrEmpty(newTitle))
+                    throw new Exception("Title is not applicable");
                 else
                     this.lblTitle.Text = newTitle;
 
-                if (newPerformer == "")
-                    throw new Exception("Performer is empty");
+                if (string.IsNullOrEmpty(newPerformer))
+                    throw new Exception("Performer is not applicable");
                 else
                     this.lblPerformer.Text = newPerformer;
 
-                if (newAlbum == "")
-                    throw new Exception("Album is empty");
+                if (string.IsNullOrEmpty(newAlbum))
+                    throw new Exception("Album is not applicable");
                 else
                     this.lblAlbum.Text = newAlbum;
-
-                this.lblTitle.Text = newTitle;
-                this.lblPerformer.Text = newPerformer;
-                this.lblAlbum.Text = newAlbum;
             }
-            catch (Exception e)
+            catch
             {
                 newTitle = title;
                 newAlbum = album;
                 newPerformer = performer;
-                
+            }
+            finally
+            {
                 this.lblTitle.Text = title;
                 this.lblPerformer.Text = performer;
                 this.lblAlbum.Text = album;
             }
 
-            Choose.settings.volume = this.volumeSlider.Value;
+            _choose.settings.volume = this.volumeSlider.Value;
         }
 
         public static void UseCustomFont(string name, int size, Label label)
@@ -554,71 +543,72 @@ namespace MusicPlayer
                 modernFont.AddFontFile(name);
                 label.Font = new Font(modernFont.Families[0], size);
             }
-            catch (Exception)
+            catch
             {
 
             }
         }
 
         /* Media stopped event gets called twice when song ends, ultimately trying to skip 2 songs forward instead of one. */
-        bool wasCalled = false; 
+        bool wasCalled = false;
         private void Player_PlayStateChange(int NewState)
         {
-            if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsStopped)
+            WMPPlayState playState = (WMPPlayState)NewState;
+            switch (playState)
             {
-                IsPlaying = false;
-                if (wasCalled == true)
-                {
-                    wasCalled = false;
-                    if (State == PlayState.OneSong)
+                case WMPPlayState.wmppsStopped:
+                    IsPlaying = false;
+                    if (wasCalled == true)
                     {
-                        if (Repeat)
-                            Choose.controls.play();
+                        wasCalled = false;
+                        if (_state == PlayState.OneSong)
+                        {
+                            if (Repeat)
+                                _choose.controls.play();
+                            else
+                            {
+                                IsPlaying = false;
+                                return;
+                            }
+                        }
                         else
                         {
-                            IsPlaying = false;
+                            _choose.controls.play();
+                            IsPlaying = true;
+                            btnActivation.Image = Buttons.Pause;
                             return;
                         }
                     }
                     else
                     {
-                        Choose.controls.play(); 
-                        IsPlaying = true;
-                        btnActivation.Image = Buttons.Pause;
-                        return;
+                        wasCalled = true;
+                        NextSong();
                     }
-                }
-                else
-                {
-                    wasCalled = true;
-                    NextSong();
-                }
-            }
-            else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsPaused)
-            {
-                IsPlaying = false;
-                btnActivation.Image = Buttons.Play;
-            }
-            else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsPlaying)
-            {
-                IsPlaying = true;
 
-                t = new Timer();
-                t.Interval = 100;
-                t.Tick += new EventHandler(t_Tick);
+                    break;
+                case WMPPlayState.wmppsPaused:
+                    IsPlaying = false;
+                    btnActivation.Image = Buttons.Play;
+                    break;
+                case WMPPlayState.wmppsPlaying:
+                    IsPlaying = true;
 
-                btnActivation.Image = Buttons.Pause;
-            }
-            else if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsMediaEnded)
-            {
-                btnActivation.Image = Buttons.Play;
-                IsPlaying = false;
+                    t = new Timer();
+                    t.Interval = 100;
+                    t.Tick += new EventHandler(t_Tick);
+
+                    btnActivation.Image = Buttons.Pause;
+                    break;
+                case WMPPlayState.wmppsMediaEnded:
+                    btnActivation.Image = Buttons.Play;
+                    IsPlaying = false;
+                    break;
             }
 
-            if (Choose.openState == WMPLib.WMPOpenState.wmposMediaOpen)
+            if (_choose.openState == WMPOpenState.wmposMediaOpen)
             {
-                songProgressBar.Maximum = (int)Choose.currentMedia.duration;
-                lblDuration.Text = Choose.currentMedia.durationString;
+                songProgressBar.Maximum = (int)_choose.currentMedia.duration;
+                lblDuration.Text = _choose.currentMedia.durationString;
                 t.Start();
             }
         }
@@ -633,7 +623,7 @@ namespace MusicPlayer
         {
             if (CurrentSong > 0)
             {
-                Choose.URL = Music.ElementAt(CurrentSong - 1);
+                _choose.URL = Music.ElementAt(CurrentSong - 1);
                 if (IsPlaying == false)
                 {
                     IsPlaying = true;
@@ -646,12 +636,12 @@ namespace MusicPlayer
 
         void NextSong()
         {
-            if (State != PlayState.OneSong)
+            if (_state != PlayState.OneSong)
             {
                 if (Music.Count - 1 > CurrentSong) // Not final song
                 {
-                    Choose.URL = Music.ElementAt(CurrentSong + 1);
-                    Choose.controls.play();
+                    _choose.URL = Music.ElementAt(CurrentSong + 1);
+                    _choose.controls.play();
                     CurrentSong++;
                     SetDetails(CurrentSong);
                 }
@@ -660,8 +650,8 @@ namespace MusicPlayer
                     if (Repeat)
                     {
                         CurrentSong = -1;
-                        Choose.URL = Music.ElementAt(CurrentSong + 1);
-                        Choose.controls.play();
+                        _choose.URL = Music.ElementAt(CurrentSong + 1);
+                        _choose.controls.play();
                         CurrentSong++;
                         SetDetails(CurrentSong);
                     }
@@ -674,9 +664,9 @@ namespace MusicPlayer
             else
             {
                 if (Repeat)
-                    Choose.controls.play();
+                    _choose.controls.play();
                 else
-                    IsPlaying = false; 
+                    IsPlaying = false;
             }
         }
 
@@ -692,7 +682,7 @@ namespace MusicPlayer
 
         private void btnShuffle_Click(object sender, EventArgs e)
         {
-            if (State != PlayState.OneSong)
+            if (_state != PlayState.OneSong)
             {
                 if (Shuffle) //Turned on
                 {
@@ -708,7 +698,7 @@ namespace MusicPlayer
                     SetDetails(CurrentSong);
 
                     //To be removed
-                    Choose.URL = Music.ElementAt(CurrentSong);
+                    _choose.URL = Music.ElementAt(CurrentSong);
                     IsPlaying = true;
 
                     this.btnShuffle.Image = Buttons.ShuffleON;
@@ -764,10 +754,10 @@ namespace MusicPlayer
 
         private void songProgressBar_MouseClick(object sender, MouseEventArgs e)
         {
-            if (Choose.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            if (_choose.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
                 float x = (float)e.X / songProgressBar.Width;
-                Choose.controls.currentPosition = x * Choose.currentMedia.duration;
+                _choose.controls.currentPosition = x * _choose.currentMedia.duration;
             }
         }
 
@@ -785,12 +775,12 @@ namespace MusicPlayer
 
         private void volumeSlider_Scroll(object sender, ScrollEventArgs e)
         {
-            Choose.settings.volume = this.volumeSlider.Value;
+            _choose.settings.volume = this.volumeSlider.Value;
         }
 
         private void volumeSlider_DockChanged(object sender, EventArgs e)
         {
-            Choose.settings.volume = this.volumeSlider.Value;
+            _choose.settings.volume = this.volumeSlider.Value;
         }
     }
 }
